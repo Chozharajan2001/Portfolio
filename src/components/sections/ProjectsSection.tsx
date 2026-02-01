@@ -353,7 +353,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onNavigate }) => {
                     {[
                         { label: 'Projects Delivered', value: '4+', color: 'green' },
                         { label: 'Years Experience', value: '2+', color: 'yellow' },
-                        { label: 'Clients Served', value: '10+', color: 'blue' },
+
                         { label: 'RegTech Systems', value: '2+', color: 'purple' },
                     ].map((stat, index) => (
                         <motion.div
