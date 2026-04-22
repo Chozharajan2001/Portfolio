@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 import { Home, User, Code, Folder, Mail, Cpu } from 'lucide-react';
 
@@ -16,7 +16,7 @@ const navItems = [
     { id: 'contact', label: 'Contact', icon: Mail },
 ];
 
-const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange, isTransitioning }) => {
+const Navigation: React.FC<NavigationProps> = memo(({ currentSection, onSectionChange, isTransitioning }) => {
     return (
         <motion.nav
             initial={{ y: -100, opacity: 0 }}
@@ -91,6 +91,6 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
             </div>
         </motion.nav>
     );
-};
+});
 
 export default Navigation;

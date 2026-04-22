@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Code, Database, Palette, Cog, Zap, Shield } from 'lucide-react';
+import { Code, Database, Palette, Cog, Zap, Shield, User } from 'lucide-react';
 import RobotGuide from '../RobotGuide';
 
 interface SkillsSectionProps {
     onNavigate: (section: string) => void;
 }
 
-const SkillsSection: React.FC<SkillsSectionProps> = ({ onNavigate }) => {
+const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) => {
     const [showGuide, setShowGuide] = useState(false);
-    type CategoryId = 'frontend' | 'backend' | 'devops' | 'tools' | 'regtech' | 'devtools';
+    type CategoryId = 'frontend' | 'backend' | 'devops' | 'tools' | 'regtech' | 'devtools' | 'languages' | 'exposure' | 'softskills';
     const [activeCategory, setActiveCategory] = useState<CategoryId>('frontend');
     const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
 
@@ -45,10 +45,12 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ onNavigate }) => {
                 { name: 'Node.js', level: 92, description: 'Runtime environment' },
                 { name: 'Express.js', level: 90, description: 'Web application framework' },
                 { name: 'Fastify', level: 75, description: 'High-performance web framework' },
+                { name: 'Bun.js', level: 70, description: 'JavaScript runtime and toolchain' },
                 { name: 'RESTful APIs', level: 90, description: 'API design and implementation' },
-                { name: 'GraphQL (Basic)', level: 65, description: 'Query language for APIs' },
+                { name: 'GraphQL', level: 65, description: 'Query language for APIs' },
                 { name: 'Microservices Architecture', level: 80, description: 'Decentralized system design' },
                 { name: 'Server-Side Rendering (SSR)', level: 85, description: 'Rendering on the server' },
+                { name: 'Redis', level: 70, description: 'In-memory data structure store' },
             ]
         },
         devops: {
@@ -103,9 +105,41 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ onNavigate }) => {
                 { name: 'Postman', level: 88, description: 'API testing and documentation' },
             ]
         },
+        languages: {
+            title: 'Programming Languages',
+            icon: Code,
+            color: 'indigo',
+            skills: [
+                { name: 'JavaScript', level: 95, description: 'Core language for web development' },
+                { name: 'TypeScript', level: 90, description: 'Type-safe JavaScript superset' },
+            ]
+        },
+        exposure: {
+            title: 'Cloud & DevOps Exposure',
+            icon: Zap,
+            color: 'orange',
+            skills: [
+                { name: 'AWS S3', level: 65, description: 'Object storage service' },
+                { name: 'AWS Lambda', level: 60, description: 'Serverless computing' },
+                { name: 'AWS EC2', level: 60, description: 'Virtual servers in the cloud' },
+                { name: 'Docker', level: 65, description: 'Containerization platform' },
+            ]
+        },
+        softskills: {
+            title: 'Soft Skills',
+            icon: User,
+            color: 'pink',
+            skills: [
+                { name: 'Rapid Learner', level: 95, description: 'Quickly adapt to new technologies and frameworks' },
+                { name: 'Analytical Thinking', level: 92, description: 'Systematic problem-solving approach' },
+                { name: 'Team Leadership', level: 88, description: 'Led 3-developer teams with agile methodologies' },
+                { name: 'Agile/Scrum', level: 90, description: 'Sprint planning and iterative development' },
+                { name: 'Cross-Team Collaboration', level: 87, description: 'Effective communication across departments' },
+            ]
+        },
     };
 
-    const categories = Object.keys(skillCategories) as CategoryId[];
+    const categories = useMemo(() => Object.keys(skillCategories) as CategoryId[], []);
 
     return (
         <section className="min-h-screen flex items-center justify-center relative pt-20 px-6">
@@ -326,6 +360,6 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ onNavigate }) => {
             </div>
         </section>
     );
-};
+});
 
 export default SkillsSection;

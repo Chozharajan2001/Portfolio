@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, Zap, Eye, Cpu } from 'lucide-react';
 
@@ -16,9 +16,9 @@ const robotCharacters = {
     gamma: { color: 'purple', icon: Zap, name: 'GAMMA' },
     delta: { color: 'green', icon: MessageCircle, name: 'DELTA' },
     omega: { color: 'orange', icon: Eye, name: 'OMEGA' },
-};
+} as const;
 
-const RobotGuide: React.FC<RobotGuideProps> = ({
+const RobotGuide: React.FC<RobotGuideProps> = React.memo(({
     character,
     message,
     isVisible,
@@ -62,9 +62,10 @@ const RobotGuide: React.FC<RobotGuideProps> = ({
             }
           }}
         >
-          {/* Robot body */}
+          {/* Robot body - optimized animations */}
           <motion.div
-            className={`relative bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-2xl border-2 border-${robot.color}-500/50 shadow-2xl shadow-${robot.color}-500/20`}
+            className={`relative bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-2xl border-2 border-${robot.color}-500/50 shadow-2xl`}
+            style={{ willChange: 'box-shadow' }}
             animate={{ 
               boxShadow: [
                 `0 0 20px rgb(0 255 255 / 0.2)`,
@@ -78,9 +79,9 @@ const RobotGuide: React.FC<RobotGuideProps> = ({
             <div className="flex items-start space-x-4">
               <motion.div
                 className={`w-16 h-16 bg-gradient-to-br from-${robot.color}-400 to-${robot.color}-600 rounded-xl flex items-center justify-center relative overflow-hidden`}
+                style={{ willChange: 'transform' }}
                 animate={{
                   scale: [1, 1.05, 1],
-                  rotate: [0, 2, 0, -2, 0]
                 }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
@@ -157,6 +158,6 @@ const RobotGuide: React.FC<RobotGuideProps> = ({
             )}
         </AnimatePresence>
     );
-};
+});
 
 export default RobotGuide;

@@ -100,6 +100,11 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) => {
         { icon: Twitter, label: 'Portfolio', href: 'https://portfolionew-git-main-chozhas-projects.vercel.app/', color: 'cyan' },
     ];
 
+    const languages = [
+        { language: 'English', proficiency: 'Professional Proficiency', level: 85 },
+        { language: 'Tamil', proficiency: 'Native', level: 100 },
+    ];
+
     return (
         <section className="min-h-screen relative pt-20 px-6 pb-12">
             <RobotGuide
@@ -321,6 +326,35 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) => {
                                         </motion.a>
                                     );
                                 })}
+                            </div>
+                        </div>
+
+                        {/* Languages */}
+                        <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 p-8 rounded-3xl border border-orange-500/30 backdrop-blur-sm">
+                            <h3 className="text-3xl font-bold text-orange-400 mb-6">Spoken Languages</h3>
+                            <div className="space-y-4">
+                                {languages.map((lang, index) => (
+                                    <motion.div
+                                        key={lang.language}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: index * 0.2 }}
+                                        className="p-4 bg-gray-700/30 rounded-xl"
+                                    >
+                                        <div className="flex justify-between items-center mb-2">
+                                            <span className="text-white font-semibold">{lang.language}</span>
+                                            <span className="text-orange-300 text-sm">{lang.proficiency}</span>
+                                        </div>
+                                        <div className="w-full bg-gray-700 rounded-full h-2">
+                                            <motion.div
+                                                initial={{ width: 0 }}
+                                                animate={{ width: `${lang.level}%` }}
+                                                transition={{ duration: 1, delay: index * 0.3 }}
+                                                className="bg-gradient-to-r from-orange-400 to-red-500 h-2 rounded-full"
+                                            />
+                                        </div>
+                                    </motion.div>
+                                ))}
                             </div>
                         </div>
 

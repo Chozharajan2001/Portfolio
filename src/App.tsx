@@ -1,14 +1,16 @@
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navigation from './components/Navigation';
-import HomeSection from './components/sections/HomeSection';
-import AboutSection from './components/sections/AboutSection';
-import SkillsSection from './components/sections/SkillsSection';
-import ProjectsSection from './components/sections/ProjectsSection';
-import ContactSection from './components/sections/ContactSection';
 import AnimatedBackground from './components/AnimatedBackground';
 import LoadingScreen from './components/LoadingScreen';
+
+// Lazy load section components for code splitting
+const HomeSection = lazy(() => import('./components/sections/HomeSection'));
+const AboutSection = lazy(() => import('./components/sections/AboutSection'));
+const SkillsSection = lazy(() => import('./components/sections/SkillsSection'));
+const ProjectsSection = lazy(() => import('./components/sections/ProjectsSection'));
+const ContactSection = lazy(() => import('./components/sections/ContactSection'));
 
 const sections = ['home', 'about', 'skills', 'projects', 'contact'];
 const sectionTitles = {
@@ -29,7 +31,7 @@ function App() {
         return () => clearTimeout(timer);
     }, []);
 
-    const handleSectionChange = async (newSection) => {
+    const handleSectionChange = async (newSection: string) => {
         if (newSection === currentSection || isTransitioning) return;
 
         setIsTransitioning(true);
@@ -53,7 +55,7 @@ function App() {
     };
 
     // Keyboard navigation
-    const handleKeyPress = useCallback((e) => {
+    const handleKeyPress = useCallback((e: KeyboardEvent) => {
         if (isTransitioning || isLoading) return;
 
         switch (e.key) {
@@ -87,19 +89,30 @@ function App() {
     }, [handleKeyPress]);
 
     const renderCurrentSection = () => {
+        // Loading fallback for lazy-loaded sections
+        const LoadingFallback = () => (
+            <div className="min-h-screen flex items-center justify-center">
+                <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                    className="w-12 h-12 border-4 border-cyan-400 border-t-transparent rounded-full"
+                />
+            </div>
+        );
+
         switch (currentSection) {
             case 'home':
-                return <HomeSection onNavigate={handleSectionChange} />;
+                return <Suspense fallback={<LoadingFallback />}><HomeSection onNavigate={handleSectionChange} /></Suspense>;
             case 'about':
-                return <AboutSection onNavigate={handleSectionChange} />;
+                return <Suspense fallback={<LoadingFallback />}><AboutSection onNavigate={handleSectionChange} /></Suspense>;
             case 'skills':
-                return <SkillsSection onNavigate={handleSectionChange} />;
+                return <Suspense fallback={<LoadingFallback />}><SkillsSection onNavigate={handleSectionChange} /></Suspense>;
             case 'projects':
-                return <ProjectsSection onNavigate={handleSectionChange} />;
+                return <Suspense fallback={<LoadingFallback />}><ProjectsSection onNavigate={handleSectionChange} /></Suspense>;
             case 'contact':
-                return <ContactSection onNavigate={handleSectionChange} />;
+                return <Suspense fallback={<LoadingFallback />}><ContactSection onNavigate={handleSectionChange} /></Suspense>;
             default:
-                return <HomeSection onNavigate={handleSectionChange} />;
+                return <Suspense fallback={<LoadingFallback />}><HomeSection onNavigate={handleSectionChange} /></Suspense>;
         }
     };
 
@@ -111,6 +124,14 @@ function App() {
 
     return (
         <div className="min-h-screen bg-black text-white overflow-hidden relative">
+            {/* Skip to main content link for accessibility */}
+            <a
+                href="#main-content"
+                className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-cyan-500 focus:text-white focus:rounded-lg"
+            >
+                Skip to main content
+            </a>
+
             <AnimatedBackground />
 
             {/* Section indicator dots - positioned at bottom center */}
@@ -125,7 +146,9 @@ function App() {
                                 ? 'w-4 h-4'
                                 : 'w-3 h-3 hover:w-3.5 hover:h-3.5'
                                 }`}
-                            title={sectionTitles[section]}
+                            title={sectionTitles[section as keyof typeof sectionTitles]}
+                            aria-label={`Navigate to ${sectionTitles[section as keyof typeof sectionTitles]} section`}
+                            aria-current={currentSection === section ? 'true' : undefined}
                         >
                             <div className={`w-full h-full rounded-full transition-all duration-300 ${currentSection === section
                                 ? 'bg-cyan-400 shadow-lg shadow-cyan-400/50'
@@ -145,76 +168,6 @@ function App() {
                 </div>
             </div>
 
-            {/* Navigation buttons - positioned on sides */}
-            <div className="fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40 pointer-events-none">
-                {/* Previous button */}
-                <button
-                    onClick={goToPrevSection}
-                    disabled={isTransitioning}
-                    className="absolute -left-96 top-1/2 transform -translate-y-1/2 pointer-events-auto group disabled:opacity-50"
-                    title="Previous section"
-                >
-                    <div className="flex items-center justify-center w-12 h-12 bg-black/30 backdrop-blur-sm rounded-full border border-white/10 transition-all duration-300 group-hover:bg-white/10 group-hover:border-cyan-400/50 group-hover:shadow-lg group-hover:shadow-cyan-400/20">
-                        <svg className="w-6 h-6 text-white group-hover:text-cyan-400 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </div>
-                </button>
-
-                {/* Next button */}
-                <button
-                    onClick={goToNextSection}
-                    disabled={isTransitioning}
-                    className="absolute -right-96 top-1/2 transform -translate-y-1/2 pointer-events-auto group disabled:opacity-50"
-                    title="Next section"
-                >
-                    <div className="flex items-center justify-center w-12 h-12 bg-black/30 backdrop-blur-sm rounded-full border border-white/10 transition-all duration-300 group-hover:bg-white/10 group-hover:border-cyan-400/50 group-hover:shadow-lg group-hover:shadow-cyan-400/20">
-                        <svg className="w-6 h-6 text-white group-hover:text-cyan-400 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                    </div>
-                </button>
-            </div>
-
-            {/* Mobile floating navigation */}
-            <div className="fixed top-1/2 right-4 transform -translate-y-1/2 z-40 flex flex-col space-y-3 md:hidden">
-                <button
-                    onClick={goToPrevSection}
-                    disabled={isTransitioning}
-                    className="flex items-center justify-center w-10 h-10 bg-black/40 backdrop-blur-sm rounded-full border border-white/20 group disabled:opacity-50"
-                    title="Previous section"
-                >
-                    <svg className="w-4 h-4 text-white group-hover:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-                    </svg>
-                </button>
-
-                <div className="flex flex-col space-y-2">
-                    {sections.map((section, index) => (
-                        <button
-                            key={section}
-                            onClick={() => handleSectionChange(section)}
-                            disabled={isTransitioning}
-                            className={`w-2 h-2 rounded-full transition-all duration-300 ${currentSection === section
-                                ? 'bg-cyan-400 scale-125'
-                                : 'bg-white/40'
-                                }`}
-                        />
-                    ))}
-                </div>
-
-                <button
-                    onClick={goToNextSection}
-                    disabled={isTransitioning}
-                    className="flex items-center justify-center w-10 h-10 bg-black/40 backdrop-blur-sm rounded-full border border-white/20 group disabled:opacity-50"
-                    title="Next section"
-                >
-                    <svg className="w-4 h-4 text-white group-hover:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                </button>
-            </div>
-
             <Navigation
                 currentSection={currentSection}
                 onSectionChange={handleSectionChange}
@@ -229,6 +182,9 @@ function App() {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.8 }}
                     className="relative z-10 h-screen overflow-y-auto"
+                    id="main-content"
+                    role="main"
+                    aria-label={`Section: ${sectionTitles[currentSection as keyof typeof sectionTitles]}`}
                 >
                     {renderCurrentSection()}
                 </motion.div>

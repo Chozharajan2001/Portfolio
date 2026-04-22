@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Github, Play, Star, Eye, GitBranch } from 'lucide-react';
+import { ExternalLink, Github, Play, Star, Eye, GitBranch, Shield, Zap, User } from 'lucide-react';
 import RobotGuide from '../RobotGuide';
 
 interface ProjectsSectionProps {
     onNavigate: (section: string) => void;
 }
 
-const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onNavigate }) => {
+const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onNavigate }) => {
     const [showGuide, setShowGuide] = useState(false);
     const [selectedProject, setSelectedProject] = useState<string | null>(null);
     const [filter, setFilter] = useState('all');
@@ -104,9 +104,11 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onNavigate }) => {
         { id: 'ai', label: 'AI/ML Projects' }
     ];
 
-    const filteredProjects = filter === 'all'
-        ? projects
-        : projects.filter(project => project.category === filter);
+    const filteredProjects = useMemo(() => {
+        return filter === 'all'
+            ? projects
+            : projects.filter(project => project.category === filter);
+    }, [filter]);
 
     const getStatusColor = (status: string) => {
         switch (status) {
@@ -206,6 +208,10 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onNavigate }) => {
                                                 src={project.image}
                                                 alt={project.title}
                                                 className="w-full h-full object-cover"
+                                                loading="lazy"
+                                                decoding="async"
+                                                width="800"
+                                                height="600"
                                                 whileHover={{ scale: 1.1 }}
                                                 transition={{ duration: 0.5 }}
                                             />
@@ -353,7 +359,6 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onNavigate }) => {
                     {[
                         { label: 'Projects Delivered', value: '4+', color: 'green' },
                         { label: 'Years Experience', value: '2+', color: 'yellow' },
-
                         { label: 'RegTech Systems', value: '2+', color: 'purple' },
                     ].map((stat, index) => (
                         <motion.div
@@ -371,6 +376,70 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onNavigate }) => {
                             <div className="text-gray-400 text-sm">{stat.label}</div>
                         </motion.div>
                     ))}
+                </motion.div>
+
+                {/* Key Achievements */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 1.2 }}
+                    className="mt-12"
+                >
+                    <h3 className="text-3xl font-bold text-green-400 mb-6 text-center">Key Achievements</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {[
+                            {
+                                title: '100% Compliance Clearance',
+                                description: 'Achieved perfect ZATCA and LHDN compliance clearance rate for all client submissions on first attempt',
+                                icon: Shield,
+                                color: 'green'
+                            },
+                            {
+                                title: '40% Performance Improvement',
+                                description: 'Optimized MongoDB aggregation pipelines resulting in 40% faster query execution times',
+                                icon: Zap,
+                                color: 'cyan'
+                            },
+                            {
+                                title: 'Zero-Penalty Production',
+                                description: 'Maintained zero-penalty production deployment record across all enterprise systems',
+                                icon: Star,
+                                color: 'yellow'
+                            },
+                            {
+                                title: 'Team Leadership',
+                                description: 'Successfully led 3-developer team across multiple sprint cycles with consistent delivery',
+                                icon: User,
+                                color: 'purple'
+                            }
+                        ].map((achievement, index) => {
+                            const Icon = achievement.icon;
+                            return (
+                                <motion.div
+                                    key={achievement.title}
+                                    initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.6, delay: 1.4 + index * 0.1 }}
+                                    whileHover={{ scale: 1.02, y: -5 }}
+                                    className="p-6 bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl border border-gray-600 hover:border-green-400/50 transition-all duration-300"
+                                >
+                                    <div className="flex items-start space-x-4">
+                                        <div className={`w-12 h-12 bg-${achievement.color}-500/20 rounded-xl flex items-center justify-center flex-shrink-0`}>
+                                            <Icon className={`w-6 h-6 text-${achievement.color}-400`} />
+                                        </div>
+                                        <div>
+                                            <h4 className={`text-lg font-bold text-${achievement.color}-300 mb-2`}>
+                                                {achievement.title}
+                                            </h4>
+                                            <p className="text-gray-400 text-sm leading-relaxed">
+                                                {achievement.description}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            );
+                        })}
+                    </div>
                 </motion.div>
 
                 {/* Next Section Hint */}
@@ -395,6 +464,6 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onNavigate }) => {
             </div>
         </section>
     );
-};
+});
 
 export default ProjectsSection;

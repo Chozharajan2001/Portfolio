@@ -9,7 +9,7 @@ interface AboutSectionProps {
 
 const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
     const [showGuide, setShowGuide] = useState(false);
-    type TabId = 'story' | 'mission' | 'vision' | 'values';
+    type TabId = 'story' | 'mission' | 'vision' | 'values' | 'education';
     const [activeTab, setActiveTab] = useState<TabId>('story');
 
     useEffect(() => {
@@ -22,12 +22,13 @@ const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
         { id: 'mission', label: 'Mission', icon: Target },
         { id: 'vision', label: 'Vision', icon: Rocket },
         { id: 'values', label: 'Values', icon: Brain },
+        { id: 'education', label: 'Education', icon: User },
     ];
 
     const content: Record<TabId, { title: string; text: string }> = {
         story: {
             title: "My Professional Journey",
-            text: "Hello! I'm CHOZHARAJAN M, an Application Developer and Full Stack Engineer based in Tamil Nadu, India. With 2 years of intensive experience specializing in scalable MERN stack and Next.js architectures, I've worked at DIGICOGNIT Pvt Ltd since February 2024. I specialize in RegTech (ZATCA/LHDN) and have led cross-functional teams of 3 developers, focusing on code quality and agile practices. My expertise spans complex engineering challenges—from cryptographic security and offline-first architecture to real-time socket integrations."
+            text: "Hello! I'm CHOZHARAJAN M, an Application Developer and Full Stack Engineer based in Tamil Nadu, India. With 2+ years of intensive experience specializing in scalable MERN stack and Next.js architectures, I've worked at DIGICOGNIT Pvt Ltd since February 2024. I specialize in RegTech (ZATCA/LHDN) and have led cross-functional teams of 3 developers, establishing org-wide documentation standards and Agile/Scrum practices. My expertise spans complex engineering challenges—from cryptographic security and offline-first architecture to real-time socket integrations. As a team lead, I conduct PR reviews, sprint planning, and mentor developers to maintain high code quality standards."
         },
         mission: {
             title: "Deliver Excellence in Every Project",
@@ -40,6 +41,10 @@ const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
         values: {
             title: "Principles I Work By",
             text: "Passion for code quality and system optimization. Transparent communication and teamwork. Continuous learning and adaptation to new technologies. Lead teams effectively while maintaining technical excellence and agile delivery."
+        },
+        education: {
+            title: "Educational Background",
+            text: "B.Tech in Information Technology from University College of Engineering, Villupuram - Anna University. Graduated in 2023 with a CGPA of 8.3/10. Strong foundation in software engineering principles, algorithms, and system design that complements my professional experience in building enterprise-grade applications."
         }
     };
 
@@ -47,7 +52,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
         <section className="min-h-screen flex items-center justify-center relative pt-20 px-6">
             <RobotGuide
                 character="beta"
-                message="Greetings! I'm BETA, your biographical assistant. Let me introduce CHOZHARAJAN M, an Application Developer and Full Stack Engineer with 2 years of experience specializing in scalable MERN stack and Next.js architectures. This developer has quite an impressive journey - shall we explore their background?"
+                message="Greetings! I'm BETA, your biographical assistant. Let me introduce CHOZHARAJAN M, an Application Developer and Full Stack Engineer with 2+ years of experience specializing in scalable MERN stack and Next.js architectures. This developer has quite an impressive journey - shall we explore their background?"
                 isVisible={showGuide}
                 onComplete={() => setShowGuide(false)}
                 position="right"
@@ -121,7 +126,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
                                             animate={{ scale: [1, 1.1, 1] }}
                                             transition={{ duration: 2, repeat: Infinity }}
                                         >
-                                            1.9+
+                                            2+
                                         </motion.div>
                                         <div className="text-sm text-gray-400">Years Exp</div>
                                     </div>

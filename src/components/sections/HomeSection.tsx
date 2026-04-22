@@ -15,7 +15,8 @@ const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate }) => {
         "APPLICATION DEVELOPER | FULL STACK ENGINEER (MERN)",
         "SPECIALIZING IN SCALABLE MERN & NEXT.JS ARCHITECTURES",
         "LEADING TEAMS & SOLVING COMPLEX ENGINEERING CHALLENGES",
-        "2 YEARS OF INTENSIVE MERN STACK EXPERIENCE"
+        "2 YEARS OF INTENSIVE MERN STACK EXPERIENCE",
+        "TEAM LEAD | PR REVIEWS | AGILE/SCRUM PRACTITIONER"
     ];
 
     useEffect(() => {
@@ -34,7 +35,7 @@ const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate }) => {
         <section className="min-h-screen flex items-center justify-center relative pt-20 px-6">
             <RobotGuide
                 character="alpha"
-                message="Welcome to my portfolio! I'm ALPHA, your digital guide. I'll help you explore the work of CHOZHARAJAN M, a skilled Application Developer and Full Stack Engineer with 2 years of experience in scalable MERN and Next.js architectures."
+                message="Welcome to my portfolio! I'm ALPHA, your digital guide. I'll help you explore the work of CHOZHARAJAN M, a skilled Application Developer and Full Stack Engineer with 2+ years of experience in scalable MERN and Next.js architectures."
                 isVisible={showGuide}
                 onComplete={() => setShowGuide(false)}
                 position="left"
@@ -95,7 +96,7 @@ const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate }) => {
                         </motion.div>
 
                         <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-                            High-performance Application Developer and Platform Engineer with 2 years of intensive experience specializing in scalable MERN stack and Next.js architectures. Proven expertise in RegTech (ZATCA/LHDN) and complex engineering challenges—from cryptographic security and offline-first architecture to real-time socket integrations.
+                            High-performance Application Developer and Platform Engineer with 2+ years of intensive experience specializing in scalable MERN stack and Next.js architectures. Proven expertise in RegTech (ZATCA/LHDN) and complex engineering challenges—from cryptographic security and offline-first architecture to real-time socket integrations. Experienced team lead managing 3 developers through sprint cycles, code reviews, and agile delivery.
                         </p>
                     </div>
 
