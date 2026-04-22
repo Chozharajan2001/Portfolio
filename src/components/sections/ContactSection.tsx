@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, Download, Linkedin, Github, Twitter } from 'lucide-react';
 import RobotGuide from '../RobotGuide';
+import emailjs from '@emailjs/browser';
 
 interface ContactSectionProps {
     onNavigate: (section: string) => void;
@@ -34,14 +35,42 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) => {
         e.preventDefault();
         setIsSubmitting(true);
 
-        // Simulate form submission
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        try {
+            // Initialize emailjs with your user ID (get this from your emailjs dashboard)
+            // For production, use environment variables as described in emailjs-setup.md
+            const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID'; // Replace with your EmailJS service ID
+            const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID'; // Replace with your EmailJS template ID
+            const userId = import.meta.env.VITE_EMAILJS_USER_ID || 'YOUR_USER_ID'; // Replace with your EmailJS user ID
 
-        setIsSubmitting(false);
-        setSubmitSuccess(true);
-        setFormData({ name: '', email: '', subject: '', message: '' });
+            // Prepare template parameters
+            const templateParams = {
+                from_name: formData.name,
+                from_email: formData.email,
+                subject: formData.subject,
+                message: formData.message,
+                to_name: 'CHOZHARAJAN M', // Your name
+            };
 
-        setTimeout(() => setSubmitSuccess(false), 5000);
+            // Validate that all required fields are provided
+            if (!serviceId || serviceId === 'YOUR_SERVICE_ID' || !templateId || templateId === 'YOUR_TEMPLATE_ID' || !userId || userId === 'YOUR_USER_ID') {
+                throw new Error('EmailJS credentials are not properly configured. Please follow the setup instructions in emailjs-setup.md');
+            }
+
+            // Send email using emailjs
+            const result = await emailjs.send(serviceId, templateId, templateParams, userId);
+
+            console.log('Email sent successfully:', result.text);
+            setIsSubmitting(false);
+            setSubmitSuccess(true);
+            setFormData({ name: '', email: '', subject: '', message: '' });
+
+            // Hide success message after 5 seconds
+            setTimeout(() => setSubmitSuccess(false), 5000);
+        } catch (error) {
+            console.error('Error sending email:', error);
+            setIsSubmitting(false);
+            alert('Failed to send message. Please try again or contact me directly at chozharajan20112001@gmail.com');
+        }
     };
 
     const contactInfo = [
