@@ -134,40 +134,6 @@ function App() {
 
             <AnimatedBackground />
 
-            {/* Section indicator dots - positioned at bottom center */}
-            <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-40">
-                <div className="flex items-center space-x-4 bg-black/30 backdrop-blur-sm rounded-full px-6 py-3 border border-white/10">
-                    {sections.map((section, index) => (
-                        <button
-                            key={section}
-                            onClick={() => handleSectionChange(section)}
-                            disabled={isTransitioning}
-                            className={`relative group transition-all duration-300 ${currentSection === section
-                                ? 'w-4 h-4'
-                                : 'w-3 h-3 hover:w-3.5 hover:h-3.5'
-                                }`}
-                            title={sectionTitles[section as keyof typeof sectionTitles]}
-                            aria-label={`Navigate to ${sectionTitles[section as keyof typeof sectionTitles]} section`}
-                            aria-current={currentSection === section ? 'true' : undefined}
-                        >
-                            <div className={`w-full h-full rounded-full transition-all duration-300 ${currentSection === section
-                                ? 'bg-cyan-400 shadow-lg shadow-cyan-400/50'
-                                : 'bg-white/40 group-hover:bg-white/70'
-                                }`} />
-
-                            {/* Progress ring for current section */}
-                            {currentSection === section && (
-                                <motion.div
-                                    initial={{ scale: 0, opacity: 0 }}
-                                    animate={{ scale: 1, opacity: 1 }}
-                                    className="absolute inset-0 rounded-full border-2 border-cyan-400/30"
-                                />
-                            )}
-                        </button>
-                    ))}
-                </div>
-            </div>
-
             <Navigation
                 currentSection={currentSection}
                 onSectionChange={handleSectionChange}

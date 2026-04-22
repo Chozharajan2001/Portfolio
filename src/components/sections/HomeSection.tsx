@@ -156,17 +156,6 @@ const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate }) => {
                         MEET THE DEVELOPER
                     </motion.button>
                 </motion.div>
-
-                {/* Scroll indicator */}
-                <motion.div
-                    animate={{ y: [0, 10, 0] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className="flex flex-col items-center cursor-pointer"
-                    onClick={() => onNavigate('about')}
-                >
-                    <span className="text-cyan-400 text-sm mb-2">SCROLL TO EXPLORE</span>
-                    <ChevronDown className="w-6 h-6 text-cyan-400" />
-                </motion.div>
             </div>
 
             {/* Animated elements */}
