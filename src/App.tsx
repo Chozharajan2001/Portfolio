@@ -196,8 +196,8 @@ function App() {
                             onClick={() => handleSectionChange(section)}
                             disabled={isTransitioning}
                             className={`w-2 h-2 rounded-full transition-all duration-300 ${currentSection === section
-                                    ? 'bg-cyan-400 scale-125'
-                                    : 'bg-white/40'
+                                ? 'bg-cyan-400 scale-125'
+                                : 'bg-white/40'
                                 }`}
                         />
                     ))}

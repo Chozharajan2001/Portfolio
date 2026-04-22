@@ -55,8 +55,8 @@ const Navigation: React.FC<NavigationProps> = ({ currentSection, onSectionChange
                                     onClick={() => onSectionChange(item.id)}
                                     disabled={isTransitioning}
                                     className={`relative px-4 py-2 rounded-lg transition-all duration-300 flex items-center space-x-2 ${isActive
-                                            ? 'bg-cyan-500/20 text-cyan-300 shadow-lg shadow-cyan-500/20'
-                                            : 'text-gray-400 hover:text-cyan-300 hover:bg-cyan-500/10'
+                                        ? 'bg-cyan-500/20 text-cyan-300 shadow-lg shadow-cyan-500/20'
+                                        : 'text-gray-400 hover:text-cyan-300 hover:bg-cyan-500/10'
                                         }`}
                                 >
                                     <Icon className="w-4 h-4" />
