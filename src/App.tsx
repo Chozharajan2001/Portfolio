@@ -54,21 +54,41 @@ function App() {
         handleSectionChange(prevSection);
     };
 
-    // Keyboard navigation
+    // Keyboard navigation - FIXED to respect input fields
     const handleKeyPress = useCallback((e: KeyboardEvent) => {
         if (isTransitioning || isLoading) return;
+
+        // Check if the event target is an input, textarea, or other editable element
+        const target = e.target as HTMLElement;
+        const isInputField = target.tagName === 'INPUT' || 
+                           target.tagName === 'TEXTAREA' || 
+                           target.tagName === 'SELECT' ||
+                           target.contentEditable === 'true';
+        
+        // Only navigate if NOT in an input field
+        if (isInputField) {
+            return; // Allow normal input behavior
+        }
 
         switch (e.key) {
             case 'ArrowRight':
             case 'ArrowDown':
-            case ' ': // Spacebar
-                e.preventDefault();
+                e.preventDefault(); // Prevent default scrolling behavior when navigating
                 goToNextSection();
                 break;
             case 'ArrowLeft':
             case 'ArrowUp':
-                e.preventDefault();
+                e.preventDefault(); // Prevent default scrolling behavior when navigating
                 goToPrevSection();
+                break;
+            case ' ':
+                // Only navigate with space if not in an input field and not pressing space in other contexts
+                if (target.tagName === 'BUTTON' || target.tagName === 'A') {
+                    // Allow space to activate buttons/links as normal
+                    return;
+                }
+                e.preventDefault();
+                goToNextSection();
                 break;
             case 'Home':
                 e.preventDefault();
