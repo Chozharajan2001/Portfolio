@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { User, Brain, Rocket, Target } from 'lucide-react';
 import RobotGuide from '../RobotGuide';
+import newProfileImg from '../../assets/images/NewProfile.png';
 
 interface AboutSectionProps {
     onNavigate: (section: string) => void;
@@ -92,9 +93,9 @@ const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
                                 whileHover={{ scale: 1.05 }}
                             >
                                 <div className="w-full h-full bg-gradient-to-br from-blue-400 to-purple-600 rounded-full flex items-center justify-center relative overflow-hidden">
-                                    {/* Profile Image - Place your image in src/assets/images/ and update the filename */}
+                                    {/* Profile Image - imported as a module for correct Vite bundling */}
                                     <img 
-                                        src="/src/assets/images/NewProfile.png" 
+                                        src={newProfileImg} 
                                         alt="CHOZHARAJAN M - Full Stack Engineer"
                                         className="w-full h-full object-cover rounded-full"
                                         onError={(e) => {
