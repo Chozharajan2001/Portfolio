@@ -33,7 +33,7 @@ const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate }) => {
 
 
     return (
-        <section className="min-h-screen flex items-center justify-center relative pt-20 px-6">
+        <section className="min-h-screen flex items-center justify-center relative pt-24 pb-12 px-4 sm:px-6">
             <RobotGuide
                 character="alpha"
                 message="Welcome to my portfolio! I'm ALPHA, your digital guide. I'll help you explore the work of CHOZHARAJAN M, a skilled Full Stack Engineer with 2+ years of experience in production-grade compliance, POS, and AI systems. He specializes in ZATCA/LHDN e-invoicing regulations, RBAC/ABAC authorization, MongoDB performance optimization, and LLM integrations."
@@ -51,7 +51,7 @@ const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate }) => {
                     className="mb-8"
                 >
                     <h1
-                        className="text-6xl md:text-8xl font-bold mb-6 animate-glow-cyan"
+                        className="text-4xl sm:text-6xl md:text-8xl font-bold mb-4 animate-glow-cyan"
                     >
                         <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
                             CHOZHARAJAN M
@@ -59,7 +59,7 @@ const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate }) => {
                     </h1>
 
                     <motion.div
-                        className="h-16 flex items-center justify-center"
+                        className="min-h-[4rem] md:h-16 flex items-center justify-center py-2"
                         key={textIndex}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -150,10 +150,10 @@ const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate }) => {
                 />
 
                 {/* Corner brackets - simplified */}
-                <div className="absolute top-24 left-6 w-12 h-12 border-l-2 border-t-2 border-cyan-400/50" />
-                <div className="absolute top-24 right-6 w-12 h-12 border-r-2 border-t-2 border-cyan-400/50" />
-                <div className="absolute bottom-6 left-6 w-12 h-12 border-l-2 border-b-2 border-cyan-400/50" />
-                <div className="absolute bottom-6 right-6 w-12 h-12 border-r-2 border-b-2 border-cyan-400/50" />
+                <div className="absolute top-24 left-6 w-12 h-12 border-l-2 border-t-2 border-cyan-400/50 hidden sm:block" />
+                <div className="absolute top-24 right-6 w-12 h-12 border-r-2 border-t-2 border-cyan-400/50 hidden sm:block" />
+                <div className="absolute bottom-6 left-6 w-12 h-12 border-l-2 border-b-2 border-cyan-400/50 hidden sm:block" />
+                <div className="absolute bottom-6 right-6 w-12 h-12 border-r-2 border-b-2 border-cyan-400/50 hidden sm:block" />
             </div>
         </section>
     );

@@ -131,7 +131,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onNavigate
     };
 
     return (
-        <section className="min-h-screen relative pt-20 px-6 pb-12">
+        <section className="min-h-screen relative pt-24 pb-12 px-4 sm:px-6">
             <RobotGuide
                 character="delta"
                 message="Excellent! I'm DELTA, your project showcase coordinator. I've curated the most impressive implementations from CHOZHARAJAN M's portfolio. From ZATCA compliance systems to AI integration platforms, each project demonstrates real-world problem-solving with cutting-edge technology!"
@@ -149,7 +149,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onNavigate
                     className="text-center mb-16"
                 >
                     <motion.h2
-                        className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-green-400 to-cyan-600 bg-clip-text text-transparent"
+                        className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-green-400 to-cyan-600 bg-clip-text text-transparent"
                         animate={{
                             backgroundPosition: ['0%', '100%', '0%']
                         }}
@@ -167,7 +167,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onNavigate
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="flex flex-wrap justify-center gap-3 mb-12"
+                    className="flex flex-nowrap md:flex-wrap overflow-x-auto md:overflow-visible justify-start md:justify-center gap-3 mb-12 pb-3 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-none"
                 >
                     {filters.map((filterOption) => {
                         const isActive = filter === filterOption.id;
@@ -178,7 +178,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onNavigate
                                 whileHover={{ scale: 1.05, y: -2 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={() => setFilter(filterOption.id)}
-                                className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${isActive
+                                className={`px-4 py-2.5 sm:px-6 sm:py-3 rounded-xl font-medium transition-all duration-300 flex-shrink-0 text-sm sm:text-base ${isActive
                                     ? 'bg-gradient-to-r from-green-500 to-cyan-500 text-white shadow-lg shadow-green-500/20'
                                     : 'bg-gray-800/50 text-gray-400 border border-gray-600 hover:border-green-400/50 hover:text-green-300'
                                     }`}
@@ -358,7 +358,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onNavigate
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 1 }}
-                    className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6"
+                    className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6"
                 >
                     {[
                         { label: 'Projects Delivered', value: '7+', color: 'green' },

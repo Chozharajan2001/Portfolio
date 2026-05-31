@@ -72,7 +72,7 @@ const RobotGuide: React.FC<RobotGuideProps> = React.memo(({
                         damping: 20,
                         duration: 0.8 
                     }}
-                    className={`fixed ${position === 'left' ? 'left-4' : 'right-4'} top-1/2 transform -translate-y-1/2 z-30 max-w-sm`}
+                    className={`fixed ${position === 'left' ? 'left-4' : 'right-4'} top-1/2 transform -translate-y-1/2 z-30 max-w-sm hidden md:block`}
                     onAnimationComplete={() => {
                         if (onComplete) {
                             setTimeout(onComplete, 3000);

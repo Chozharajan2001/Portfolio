@@ -51,7 +51,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
     };
 
     return (
-        <section className="min-h-screen flex items-center justify-center relative pt-20 px-6">
+        <section className="min-h-screen flex items-center justify-center relative pt-24 pb-12 px-4 sm:px-6">
             <RobotGuide
                 character="beta"
                 message="Greetings! I'm BETA, your biographical assistant. Let me introduce CHOZHARAJAN M, a Full Stack Engineer with 2+ years of experience in production-grade compliance, POS, and AI systems. This developer specializes in ZATCA/LHDN e-invoicing regulations, RBAC/ABAC authorization, MongoDB performance optimization, and LLM integrations. Shall we explore their background?"
@@ -69,7 +69,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
                     className="text-center mb-16"
                 >
                     <h2
-                        className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent animate-bg-pos"
+                        className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent animate-bg-pos"
                     >
                         ABOUT ME
                     </h2>
@@ -86,7 +86,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="lg:col-span-1"
                     >
-                        <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 p-8 rounded-3xl border border-blue-500/30 backdrop-blur-sm h-full">
+                        <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 p-5 sm:p-8 rounded-3xl border border-blue-500/30 backdrop-blur-sm h-full">
                             {/* Avatar */}
                             <motion.div
                                 className="w-48 h-48 mx-auto mb-6 relative"
@@ -162,9 +162,9 @@ const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
                         transition={{ duration: 0.8, delay: 0.4 }}
                         className="lg:col-span-2"
                     >
-                        <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 p-8 rounded-3xl border border-blue-500/30 backdrop-blur-sm h-full">
+                        <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 p-5 sm:p-8 rounded-3xl border border-blue-500/30 backdrop-blur-sm h-full">
                             {/* Tab Navigation */}
-                            <div className="flex flex-wrap gap-2 mb-8">
+                            <div className="flex flex-nowrap md:flex-wrap overflow-x-auto md:overflow-visible gap-2 mb-8 pb-2 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-none">
                                 {tabs.map((tab) => {
                                     const Icon = tab.icon;
                                     const isActive = activeTab === tab.id;

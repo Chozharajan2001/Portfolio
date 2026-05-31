@@ -149,7 +149,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) 
 
 
     return (
-        <section className="min-h-screen flex items-center justify-center relative pt-20 px-6">
+        <section className="min-h-screen flex items-center justify-center relative pt-24 pb-12 px-4 sm:px-6">
             <RobotGuide
                 character="gamma"
                 message="Greetings! I'm GAMMA, the skills analyzer. I've compiled a comprehensive report of CHOZHARAJAN M's technical capabilities. From full-stack development to RegTech compliance systems, these skills have been battle-tested in real enterprise projects!"
@@ -167,7 +167,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) 
                     className="text-center mb-16"
                 >
                     <h1
-                        className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent animate-glow-purple"
+                        className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent animate-glow-purple"
                     >
                         TECHNICAL EXPERTISE
                     </h1>
@@ -181,7 +181,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) 
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="flex flex-wrap justify-center gap-4 mb-12"
+                    className="flex flex-nowrap md:flex-wrap overflow-x-auto md:overflow-visible justify-start md:justify-center gap-3 mb-12 pb-3 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-none"
                 >
                     {categories.map((category) => {
                         const { title, icon: Icon, color } = skillCategories[category];
@@ -193,12 +193,12 @@ const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) 
                                 whileHover={{ scale: 1.05, y: -2 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={() => setActiveCategory(category)}
-                                className={`flex items-center space-x-3 px-6 py-4 rounded-2xl font-semibold transition-all duration-300 border ${isActive
+                                className={`flex items-center space-x-3 px-4 py-2.5 sm:px-6 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-sm sm:text-base transition-all duration-300 border flex-shrink-0 ${isActive
                                     ? `bg-${color}-500/20 text-${color}-300 border-${color}-400 shadow-lg shadow-${color}-500/20`
                                     : 'bg-gray-800/50 text-gray-400 border-gray-600 hover:border-purple-400/50 hover:text-purple-300'
                                     }`}
                             >
-                                <Icon className="w-6 h-6" />
+                                <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                                 <span>{title}</span>
                             </motion.button>
                         );
@@ -227,7 +227,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) 
                                     transition={{ duration: 0.6, delay: index * 0.1 }}
                                     onMouseEnter={() => setHoveredSkill(skill.name)}
                                     onMouseLeave={() => setHoveredSkill(null)}
-                                    className={`relative p-6 rounded-2xl border transition-all duration-300 cursor-pointer ${isHovered
+                                    className={`relative p-5 sm:p-6 rounded-2xl border transition-all duration-300 cursor-pointer ${isHovered
                                         ? `bg-${color}-500/10 border-${color}-400 shadow-lg shadow-${color}-500/20`
                                         : 'bg-gray-800/50 border-gray-600 hover:border-gray-500'
                                         }`}

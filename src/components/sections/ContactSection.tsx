@@ -119,7 +119,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) => {
     ];
 
     return (
-        <section className="min-h-screen relative pt-20 px-6 pb-12">
+        <section className="min-h-screen relative pt-24 pb-12 px-4 sm:px-6">
             <RobotGuide
                 character="omega"
                 message="Ready to connect! I'm OMEGA, your communications specialist. Feel free to reach out to CHOZHARAJAN M - Application Developer and Full Stack Engineer. I'm available for freelance work and full-time positions!"
@@ -137,7 +137,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) => {
                     className="text-center mb-16"
                 >
                     <motion.h2
-                        className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-orange-400 to-red-600 bg-clip-text text-transparent"
+                        className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-orange-400 to-red-600 bg-clip-text text-transparent"
                         animate={{
                             textShadow: [
                                 "0 0 20px rgba(251, 146, 60, 0.4)",
@@ -161,8 +161,8 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) => {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                     >
-                        <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 p-8 rounded-3xl border border-orange-500/30 backdrop-blur-sm">
-                            <h3 className="text-3xl font-bold text-orange-400 mb-6 flex items-center">
+                        <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 p-5 sm:p-8 rounded-3xl border border-orange-500/30 backdrop-blur-sm">
+                            <h3 className="text-2xl sm:text-3xl font-bold text-orange-400 mb-6 flex items-center">
                                 <Send className="w-8 h-8 mr-3" />
                                 Send Message
                             </h3>
@@ -296,8 +296,8 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) => {
                         className="space-y-8"
                     >
                         {/* Contact Information */}
-                        <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 p-8 rounded-3xl border border-orange-500/30 backdrop-blur-sm">
-                            <h3 className="text-3xl font-bold text-orange-400 mb-6">Contact Information</h3>
+                        <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 p-5 sm:p-8 rounded-3xl border border-orange-500/30 backdrop-blur-sm">
+                            <h3 className="text-2xl sm:text-3xl font-bold text-orange-400 mb-6">Contact Information</h3>
 
                             <div className="space-y-4">
                                 {contactInfo.map((info) => {
@@ -324,8 +324,8 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) => {
                         </div>
 
                         {/* Social Links */}
-                        <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 p-8 rounded-3xl border border-orange-500/30 backdrop-blur-sm">
-                            <h3 className="text-3xl font-bold text-orange-400 mb-6">Connect Online</h3>
+                        <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 p-5 sm:p-8 rounded-3xl border border-orange-500/30 backdrop-blur-sm">
+                            <h3 className="text-2xl sm:text-3xl font-bold text-orange-400 mb-6">Connect Online</h3>
 
                             <div className="grid grid-cols-1 gap-4">
                                 {socialLinks.map((social) => {
@@ -348,8 +348,8 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) => {
                         </div>
 
                         {/* Languages */}
-                        <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 p-8 rounded-3xl border border-orange-500/30 backdrop-blur-sm">
-                            <h3 className="text-3xl font-bold text-orange-400 mb-6">Spoken Languages</h3>
+                        <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 p-5 sm:p-8 rounded-3xl border border-orange-500/30 backdrop-blur-sm">
+                            <h3 className="text-2xl sm:text-3xl font-bold text-orange-400 mb-6">Spoken Languages</h3>
                             <div className="space-y-4">
                                 {languages.map((lang, index) => (
                                     <motion.div
