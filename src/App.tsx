@@ -167,7 +167,7 @@ function App() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="relative z-10 h-screen overflow-y-auto"
+                    className="relative z-10 h-screen overflow-y-auto overflow-x-hidden w-full"
                     id="main-content"
                     role="main"
                     aria-label={`Section: ${sectionTitles[currentSection as keyof typeof sectionTitles]}`}

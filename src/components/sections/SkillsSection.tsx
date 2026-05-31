@@ -283,7 +283,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) 
                 position="left"
             />
 
-            <div className="max-w-7xl mx-auto">
+            <div className="w-full max-w-7xl mx-auto">
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 50 }}
@@ -292,17 +292,17 @@ const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) 
                     className="text-center mb-16"
                 >
                     <h1
-                        className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent animate-glow-purple"
+                        className="text-3xl sm:text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent animate-glow-purple"
                     >
                         TECHNICAL EXPERTISE
                     </h1>
-                    <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                    <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto">
                         Comprehensive overview of CHOZHARAJAN M's technical capabilities across full-stack development, compliance systems, and enterprise solutions.
                     </p>
                 </motion.div>
 
                 {/* Mobile scroll swipe indicator helper */}
-                <div className="block md:hidden text-center text-xs text-purple-400/60 mb-3 animate-pulse">
+                <div className="block md:hidden text-center text-xs text-cyan-400/90 font-medium mb-4 animate-pulse">
                     Swipe categories ↔
                 </div>
 
@@ -414,7 +414,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) 
                                     </AnimatePresence>
 
                                     {/* Skill level indicator */}
-                                    <div className="absolute top-4 right-4 flex space-x-1">
+                                    <div className="absolute top-4 right-4 hidden sm:flex space-x-1">
                                         {[...Array(5)].map((_, i) => (
                                             <motion.div
                                                 key={i}

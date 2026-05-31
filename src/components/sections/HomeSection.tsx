@@ -42,7 +42,7 @@ const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate }) => {
                 position="left"
             />
 
-            <div className="max-w-6xl mx-auto text-center">
+            <div className="w-full max-w-6xl mx-auto text-center px-4 sm:px-0">
                 {/* Main title */}
                 <motion.div
                     initial={{ opacity: 0, y: 50 }}

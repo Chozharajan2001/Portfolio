@@ -60,7 +60,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
                 position="right"
             />
 
-            <div className="max-w-6xl mx-auto">
+            <div className="w-full max-w-6xl mx-auto">
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 50 }}
