@@ -28,19 +28,19 @@ const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
     const content: Record<TabId, { title: string; text: string }> = {
         story: {
             title: "My Professional Journey",
-            text: "Hello! I'm CHOZHARAJAN M, a Full Stack Engineer with 2+ years shipping production-grade compliance, POS, and AI systems. Specialized in ZATCA/LHDN e-invoicing regulations, RBAC/ABAC authorization, MongoDB performance optimization, and LLM integrations. I currently work at DIGICOGNIT Pvt Ltd as an Application Developer, where I've led engineering teams through Agile sprints, achieved regulatory clearance for compliance systems, and optimized database performance. I delivered zero-penalty deployments while establishing PR review and documentation standards adopted organization-wide."
+            text: "Hello! I'm CHOZHARAJAN M, an Application Developer and Full Stack Engineer based in Tamil Nadu, India. With 2+ years of intensive experience specializing in scalable MERN stack and Next.js architectures, I've worked at DIGICOGNIT Pvt Ltd since February 2024. I specialize in RegTech (ZATCA/LHDN) and have led cross-functional teams of 3 developers, establishing org-wide documentation standards and Agile/Scrum practices. My expertise spans complex engineering challenges—from cryptographic security and offline-first architecture to real-time socket integrations. As a team lead, I conduct PR reviews, sprint planning, and mentor developers to maintain high code quality standards."
         },
         mission: {
             title: "Deliver Excellence in Every Project",
-            text: "Transform complex business requirements into reliable, scalable solutions. I focus on performance optimization, security implementation, and maintainable code—leveraging advanced technologies like Next.js SSR/SSG, MongoDB aggregation pipelines, and real-time systems to achieve measurable impact. My mission is to continuously improve systems and deliver value to users while maintaining high engineering standards."
+            text: "Transform complex business requirements into reliable, scalable solutions. I focus on performance optimization, security implementation, and maintainable code—leveraging advanced technologies like Next.js SSR/SSG, MongoDB aggregation pipelines, and real-time systems to achieve measurable impact."
         },
         vision: {
             title: "Lead Innovation in Full-Stack Development",
-            text: "Continue evolving from individual contributor to technical leader—architecting robust systems, implementing DevOps practices, and mentoring developers. I aim to drive innovation in emerging technologies like AI integration, compliance systems, and low-code platforms while maintaining high engineering standards and fostering collaborative team environments."
+            text: "Continue evolving from individual contributor to technical leader—architecting robust systems, implementing DevOps practices, and mentoring developers. I aim to drive innovation in emerging technologies while maintaining high engineering standards and fostering collaborative team environments."
         },
         values: {
             title: "Principles I Work By",
-            text: "Passion for code quality and system optimization. Transparent communication and teamwork. Continuous learning and adaptation to new technologies. Lead teams effectively while maintaining technical excellence and agile delivery. Focus on delivering production-grade systems with zero-penalty deployments."
+            text: "Passion for code quality and system optimization. Transparent communication and teamwork. Continuous learning and adaptation to new technologies. Lead teams effectively while maintaining technical excellence and agile delivery."
         },
         education: {
             title: "Educational Background",
@@ -52,7 +52,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
         <section className="min-h-screen flex items-center justify-center relative pt-20 px-6">
             <RobotGuide
                 character="beta"
-                message="Greetings! I'm BETA, your biographical assistant. Let me introduce CHOZHARAJAN M, a Full Stack Engineer with 2+ years of experience in production-grade compliance, POS, and AI systems. This developer specializes in ZATCA/LHDN e-invoicing regulations, RBAC/ABAC authorization, MongoDB performance optimization, and LLM integrations. Shall we explore their background?"
+                message="Greetings! I'm BETA, your biographical assistant. Let me introduce CHOZHARAJAN M, an Application Developer and Full Stack Engineer with 2+ years of experience specializing in scalable MERN stack and Next.js architectures. This developer has quite an impressive journey - shall we explore their background?"
                 isVisible={showGuide}
                 onComplete={() => setShowGuide(false)}
                 position="right"
@@ -76,7 +76,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
                         ABOUT ME
                     </motion.h2>
                     <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                        Get to know CHOZHARAJAN M - Full Stack Engineer specializing in production-grade compliance, POS, and AI systems.
+                        Get to know CHOZHARAJAN M - Application Developer and Full Stack Engineer with expertise in MERN stack and Next.js architectures.
                     </p>
                 </motion.div>
 
@@ -95,17 +95,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
                                 whileHover={{ scale: 1.05 }}
                             >
                                 <div className="w-full h-full bg-gradient-to-br from-blue-400 to-purple-600 rounded-full flex items-center justify-center relative overflow-hidden">
-                                    {/* Profile Image - Update the path to your specific image file */}
-                                    <img 
-                                        src="/src/assets/images/NewProfile.png" 
-                                        alt="CHOZHARAJAN M - Full Stack Engineer"
-                                        className="w-full h-full object-cover rounded-full"
-                                        onError={(e) => {
-                                            const target = e.target as HTMLImageElement;
-                                            target.onerror = null;
-                                            target.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><circle cx="100" cy="100" r="100" fill="%233b82f6"/><path d="M100,60c16.5,0,30,13.5,30,30s-13.5,30-30,30s-30-13.5-30-30S83.5,60,100,60z" fill="%23ffffff"/><path d="M100,140c-33.1,0-60,17.9-60,40h120C160,157.9,133.1,140,100,140z" fill="%23ffffff"/></svg>';
-                                        }}
-                                    />
+                                    <User className="w-24 h-24 text-white" />
 
                                     {/* Scanning effect */}
                                     <motion.div
@@ -126,7 +116,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
                             {/* Profile info */}
                             <div className="text-center">
                                 <h3 className="text-2xl font-bold text-blue-400 mb-2">CHOZHARAJAN M</h3>
-                                <p className="text-gray-300 mb-4">Full Stack Engineer | AI-Integrated Applications</p>
+                                <p className="text-gray-300 mb-4">Application Developer | Full Stack Engineer (MERN)</p>
 
                                 {/* Stats */}
                                 <div className="grid grid-cols-2 gap-4 mb-6">
@@ -146,7 +136,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
                                             animate={{ scale: [1, 1.1, 1] }}
                                             transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
                                         >
-                                            7+
+                                            4+
                                         </motion.div>
                                         <div className="text-sm text-gray-400">Projects</div>
                                     </div>
