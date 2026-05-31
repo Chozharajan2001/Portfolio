@@ -166,19 +166,11 @@ const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) 
                     transition={{ duration: 0.8 }}
                     className="text-center mb-16"
                 >
-                    <motion.h2
-                        className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent"
-                        animate={{
-                            textShadow: [
-                                "0 0 20px rgba(168, 85, 247, 0.4)",
-                                "0 0 40px rgba(168, 85, 247, 0.6)",
-                                "0 0 20px rgba(168, 85, 247, 0.4)"
-                            ]
-                        }}
-                        transition={{ duration: 2, repeat: Infinity }}
+                    <h1
+                        className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent animate-glow-purple"
                     >
                         TECHNICAL EXPERTISE
-                    </motion.h2>
+                    </h1>
                     <p className="text-xl text-gray-300 max-w-3xl mx-auto">
                         Comprehensive overview of CHOZHARAJAN M's technical capabilities across full-stack development, compliance systems, and enterprise solutions.
                     </p>

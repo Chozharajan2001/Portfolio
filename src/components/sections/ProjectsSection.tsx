@@ -234,20 +234,12 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onNavigate
                                             {/* Overlay */}
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
 
-                                            {/* Status Badge */}
-                                            <motion.div
-                                                className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold bg-${statusColor}-500/20 text-${statusColor}-300 border border-${statusColor}-500/40`}
-                                                animate={{
-                                                    boxShadow: [
-                                                        `0 0 10px rgb(34 197 94 / 0.3)`,
-                                                        `0 0 20px rgb(34 197 94 / 0.5)`,
-                                                        `0 0 10px rgb(34 197 94 / 0.3)`
-                                                    ]
-                                                }}
-                                                transition={{ duration: 2, repeat: Infinity }}
+                                            {/* Status Badge - GPU CSS animations */}
+                                            <div
+                                                className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold bg-${statusColor}-500/20 text-${statusColor}-300 border border-${statusColor}-500/40 animate-badge-glow`}
                                             >
                                                 {project.status.toUpperCase()}
-                                            </motion.div>
+                                            </div>
 
                                             {/* Project Stats */}
                                             <div className="absolute bottom-4 left-4 flex space-x-4 text-white/80">
@@ -378,13 +370,12 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onNavigate
                             whileHover={{ scale: 1.05, y: -5 }}
                             className="text-center p-6 bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl border border-gray-600"
                         >
-                            <motion.div
-                                className={`text-3xl font-bold text-${stat.color}-400 mb-2`}
-                                animate={{ scale: [1, 1.1, 1] }}
-                                transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
+                            <div
+                                className={`text-3xl font-bold text-${stat.color}-400 mb-2 animate-pulse-scale`}
+                                style={{ animationDelay: `${index * 0.3}s` } as React.CSSProperties}
                             >
                                 {stat.value}
-                            </motion.div>
+                            </div>
                             <div className="text-gray-400 text-sm">{stat.label}</div>
                         </motion.div>
                     ))}

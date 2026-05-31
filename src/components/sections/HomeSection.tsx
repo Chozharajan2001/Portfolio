@@ -50,21 +50,13 @@ const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate }) => {
                     transition={{ duration: 1, delay: 0.2 }}
                     className="mb-8"
                 >
-                    <motion.h1
-                        className="text-6xl md:text-8xl font-bold mb-6"
-                        animate={{
-                            textShadow: [
-                                "0 0 20px rgba(6, 182, 212, 0.5)",
-                                "0 0 40px rgba(6, 182, 212, 0.8)",
-                                "0 0 20px rgba(6, 182, 212, 0.5)"
-                            ]
-                        }}
-                        transition={{ duration: 2, repeat: Infinity }}
+                    <h1
+                        className="text-6xl md:text-8xl font-bold mb-6 animate-glow-cyan"
                     >
                         <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
                             CHOZHARAJAN M
                         </span>
-                    </motion.h1>
+                    </h1>
 
                     <motion.div
                         className="h-16 flex items-center justify-center"
@@ -88,41 +80,30 @@ const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate }) => {
                     className="relative mb-12"
                 >
                     <div className="bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 p-8 rounded-3xl border border-cyan-500/30 backdrop-blur-sm">
-                        <motion.div
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 10, repeat: Infinity, ease: 'linear' }} // Slower rotation to reduce CPU load
-                            className="w-32 h-32 mx-auto mb-6 border-4 border-cyan-400 border-dashed rounded-full flex items-center justify-center"
+                        <div
+                            className="w-32 h-32 mx-auto mb-6 border-4 border-cyan-400 border-dashed rounded-full flex items-center justify-center animate-spin-slow"
                         >
                             <Code className="w-16 h-16 text-cyan-400" />
-                        </motion.div>
+                        </div>
 
                         <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
                             Full Stack Engineer with 2+ years shipping production-grade compliance, POS, and AI systems. Specialized in ZATCA/LHDN e-invoicing regulations, RBAC/ABAC authorization, MongoDB performance optimization, and LLM integrations. Delivered regulatory clearance, query performance improvements, and led engineering teams across enterprise fintech deployments.
                         </p>
                     </div>
 
-                    {/* Floating icons - reduced number and complexity */}
+                    {/* Floating icons - optimized with GPU CSS animations */}
                     {[Zap, Star, Code].map((Icon, index) => (
-                        <motion.div
+                        <div
                             key={index}
-                            className="absolute"
+                            className="absolute animate-float-icon"
                             style={{
                                 top: `${20 + index * 20}%`,
                                 left: `${10 + index * 30}%`,
-                            }}
-                            animate={{
-                                y: [0, -20, 0],
-                                rotate: [0, 180, 360],
-                                opacity: [0.4, 0.8, 0.4],
-                            }}
-                            transition={{
-                                duration: 4,
-                                repeat: Infinity,
-                                delay: index * 0.5,
-                            }}
+                                animationDelay: `${index * 0.5}s`,
+                            } as React.CSSProperties}
                         >
                             <Icon className="w-8 h-8 text-cyan-400/60" />
-                        </motion.div>
+                        </div>
                     ))}
                 </motion.div>
 

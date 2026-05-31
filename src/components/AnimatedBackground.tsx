@@ -31,57 +31,28 @@ const AnimatedBackground: React.FC = () => {
         </svg>
       </div>
 
-      {/* Floating particles - reduced from 20 to 10 */}
+      {/* Floating particles - reduced from 20 to 10 - GPU-accelerated CSS variables */}
       {particles.map((particle) => (
-        <motion.div
+        <div
           key={particle.id}
-          className="absolute w-1 h-1 bg-cyan-400 rounded-full opacity-60"
-          style={{ willChange: 'transform' }}
-          initial={{
-            x: particle.initialX,
-            y: particle.initialY,
-          }}
-          animate={{
-            x: particle.finalX,
-            y: particle.finalY,
-          }}
-          transition={{
-            duration: particle.duration,
-            repeat: Infinity,
-            repeatType: 'reverse',
-            ease: 'linear',
-          }}
+          className="absolute w-1 h-1 bg-cyan-400 rounded-full opacity-60 animate-particle"
+          style={{
+            '--initial-x': `${particle.initialX}px`,
+            '--initial-y': `${particle.initialY}px`,
+            '--final-x': `${particle.finalX}px`,
+            '--final-y': `${particle.finalY}px`,
+            '--duration': `${particle.duration}s`,
+          } as React.CSSProperties}
         />
       ))}
 
-      {/* Glowing orbs - optimized with CSS will-change */}
-      <motion.div
-        className="absolute top-1/4 right-1/4 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl"
-        style={{ willChange: 'transform, opacity' }}
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.5, 0.3],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
+      {/* Glowing orbs - optimized with GPU CSS animations */}
+      <div
+        className="absolute top-1/4 right-1/4 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl animate-orb-1"
       />
 
-      <motion.div
-        className="absolute bottom-1/4 left-1/4 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl"
-        style={{ willChange: 'transform, opacity' }}
-        animate={{
-          scale: [1.2, 1, 1.2],
-          opacity: [0.2, 0.4, 0.2],
-        }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          ease: 'easeInOut',
-          delay: 1,
-        }}
+      <div
+        className="absolute bottom-1/4 left-1/4 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl animate-orb-2"
       />
 
       {/* Circuit lines - simplified animation */}

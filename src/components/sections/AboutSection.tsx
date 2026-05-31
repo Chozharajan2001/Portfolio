@@ -67,15 +67,11 @@ const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
                     transition={{ duration: 0.8 }}
                     className="text-center mb-16"
                 >
-                    <motion.h2
-                        className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent"
-                        animate={{
-                            backgroundPosition: ['0%', '100%', '0%']
-                        }}
-                        transition={{ duration: 3, repeat: Infinity }}
+                    <h2
+                        className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent animate-bg-pos"
                     >
                         ABOUT ME
-                    </motion.h2>
+                    </h2>
                     <p className="text-xl text-gray-300 max-w-2xl mx-auto">
                         Get to know CHOZHARAJAN M - Full Stack Engineer specializing in production-grade compliance, POS, and AI systems.
                     </p>
@@ -108,19 +104,15 @@ const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
                                         }}
                                     />
 
-                                    {/* Scanning effect */}
-                                    <motion.div
-                                        className="absolute inset-0 bg-gradient-to-b from-transparent via-white/20 to-transparent"
-                                        animate={{ y: ['-100%', '100%'] }}
-                                        transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                                    {/* Scanning effect - GPU CSS animation */}
+                                    <div
+                                        className="absolute inset-0 bg-gradient-to-b from-transparent via-white/20 to-transparent animate-scan-pause"
                                     />
                                 </div>
 
-                                {/* Status ring */}
-                                <motion.div
-                                    className="absolute inset-0 border-4 border-green-400 rounded-full"
-                                    animate={{ rotate: 360 }}
-                                    transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+                                {/* Status ring - GPU CSS animation */}
+                                <div
+                                    className="absolute inset-0 border-4 border-green-400 rounded-full animate-spin-slow"
                                 />
                             </motion.div>
 
@@ -132,23 +124,20 @@ const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
                                 {/* Stats */}
                                 <div className="grid grid-cols-2 gap-4 mb-6">
                                     <div className="text-center">
-                                        <motion.div
-                                            className="text-3xl font-bold text-green-400"
-                                            animate={{ scale: [1, 1.1, 1] }}
-                                            transition={{ duration: 2, repeat: Infinity }}
+                                        <div
+                                            className="text-3xl font-bold text-green-400 animate-pulse-scale"
                                         >
                                             2+
-                                        </motion.div>
+                                        </div>
                                         <div className="text-sm text-gray-400">Years Exp</div>
                                     </div>
                                     <div className="text-center">
-                                        <motion.div
-                                            className="text-3xl font-bold text-cyan-400"
-                                            animate={{ scale: [1, 1.1, 1] }}
-                                            transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                                        <div
+                                            className="text-3xl font-bold text-cyan-400 animate-pulse-scale"
+                                            style={{ animationDelay: '0.5s' }}
                                         >
                                             7+
-                                        </motion.div>
+                                        </div>
                                         <div className="text-sm text-gray-400">Projects</div>
                                     </div>
                                 </div>
