@@ -32,7 +32,8 @@ const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) 
                 { name: 'Zustand', level: 85, description: 'State management solution' },
                 { name: 'Context API', level: 88, description: 'Global state management' },
                 { name: 'Ant Design / Material UI', level: 85, description: 'UI libraries & design systems' },
-                { name: 'SCSS', level: 84, description: 'Advanced styling with modules' },
+                { name: 'Tailwind CSS', level: 90, description: 'Utility-first CSS framework' },
+                { name: 'shadcn/ui', level: 85, description: 'UI component library' },
                 { name: 'Responsive Web Design', level: 90, description: 'Mobile-first, adaptive layouts' },
                 { name: 'Performance Tuning (useMemo, React.memo)', level: 88, description: 'Rendering optimization techniques' },
             ]
@@ -69,10 +70,11 @@ const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) 
             color: 'purple',
             skills: [
                 { name: 'MongoDB', level: 90, description: 'NoSQL database management' },
+                { name: 'PostgreSQL', level: 80, description: 'Relational database management' },
+                { name: 'Prisma', level: 85, description: 'Modern database toolkit' },
                 { name: 'Mongoose', level: 88, description: 'ODM for MongoDB' },
                 { name: 'Advanced Aggregation Pipelines', level: 85, description: 'Complex data processing' },
                 { name: 'Database Indexing', level: 82, description: 'Performance optimization' },
-                { name: 'Transaction Management', level: 80, description: 'ACID compliance' },
                 { name: 'JWT', level: 88, description: 'Token-based authentication' },
                 { name: 'Argon2', level: 85, description: 'Password hashing algorithm' },
                 { name: 'Bcrypt', level: 85, description: 'Password hashing' },
@@ -99,10 +101,13 @@ const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) 
             icon: Cog,
             color: 'yellow',
             skills: [
-                { name: 'Git/GitHub/GitLab (Basics)', level: 80, description: 'Version control and collaboration' },
+                { name: 'Docker', level: 85, description: 'Containerization platform' },
+                { name: 'AWS (EC2, S3, Lambda, RDS, IAM)', level: 75, description: 'Amazon Web Services suite' },
                 { name: 'Vercel', level: 85, description: 'Deployment platform' },
-                { name: 'Bun.js', level: 70, description: 'JavaScript runtime' },
-                { name: 'Postman', level: 88, description: 'API testing and documentation' },
+                { name: 'Railway', level: 70, description: 'Platform for deploying apps' },
+                { name: 'Git/GitHub/GitLab', level: 85, description: 'Version control and collaboration' },
+                { name: 'CI/CD Pipelines', level: 75, description: 'Continuous integration/delivery' },
+                { name: 'GitHub Actions', level: 70, description: 'Automated workflows' },
             ]
         },
         languages: {
@@ -115,14 +120,14 @@ const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) 
             ]
         },
         exposure: {
-            title: 'Cloud & DevOps Exposure',
+            title: 'AI & LLM Integration',
             icon: Zap,
             color: 'orange',
             skills: [
-                { name: 'AWS S3', level: 65, description: 'Object storage service' },
-                { name: 'AWS Lambda', level: 60, description: 'Serverless computing' },
-                { name: 'AWS EC2', level: 60, description: 'Virtual servers in the cloud' },
-                { name: 'Docker', level: 65, description: 'Containerization platform' },
+                { name: 'Vercel AI SDK', level: 85, description: 'AI SDK for building LLM applications' },
+                { name: 'LLM Integration', level: 80, description: 'Integrating various large language models' },
+                { name: 'Prompt Engineering', level: 75, description: 'Crafting effective prompts' },
+                { name: 'Streaming APIs', level: 80, description: 'Real-time token streaming' },
             ]
         },
         softskills: {
@@ -132,7 +137,8 @@ const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) 
             skills: [
                 { name: 'Rapid Learner', level: 95, description: 'Quickly adapt to new technologies and frameworks' },
                 { name: 'Analytical Thinking', level: 92, description: 'Systematic problem-solving approach' },
-                { name: 'Team Leadership', level: 88, description: 'Led 3-developer teams with agile methodologies' },
+                { name: 'Team Leadership', level: 88, description: 'Led engineering teams with agile methodologies' },
+                { name: 'Production Deployments', level: 90, description: 'Zero-penalty deployment record' },
                 { name: 'Agile/Scrum', level: 90, description: 'Sprint planning and iterative development' },
                 { name: 'Cross-Team Collaboration', level: 87, description: 'Effective communication across departments' },
             ]
@@ -145,7 +151,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) 
         <section className="min-h-screen flex items-center justify-center relative pt-20 px-6">
             <RobotGuide
                 character="gamma"
-                message="Greetings! I'm GAMMA, the skills analyzer. I've compiled a comprehensive report of CHOZHARAJAN M's technical capabilities. From MERN stack expertise to RegTech compliance systems, these skills have been battle-tested in real enterprise projects!"
+                message="Greetings! I'm GAMMA, the skills analyzer. I've compiled a comprehensive report of CHOZHARAJAN M's technical capabilities. From full-stack development to RegTech compliance systems, these skills have been battle-tested in real enterprise projects!"
                 isVisible={showGuide}
                 onComplete={() => setShowGuide(false)}
                 position="left"
@@ -173,7 +179,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) 
                         TECHNICAL EXPERTISE
                     </motion.h2>
                     <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                        Comprehensive overview of CHOZHARAJAN M's technical capabilities across MERN stack, Next.js, RegTech compliance, and enterprise systems.
+                        Comprehensive overview of CHOZHARAJAN M's technical capabilities across full-stack development, compliance systems, and enterprise solutions.
                     </p>
                 </motion.div>
 
@@ -312,10 +318,10 @@ const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) 
                     className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6"
                 >
                     {[
-                        { label: 'Technologies', value: '20+', icon: Code },
-                        { label: 'Frameworks', value: '8+', icon: Zap },
-                        { label: 'Databases', value: '2+', icon: Database },
-                        { label: 'Specializations', value: '5+', icon: Shield },
+                        { label: 'Technologies', value: '25+', icon: Code },
+                        { label: 'Frameworks', value: '10+', icon: Zap },
+                        { label: 'Databases', value: '3+', icon: Database },
+                        { label: 'Specializations', value: '6+', icon: Shield },
                     ].map((stat, index) => {
                         const Icon = stat.icon;
                         return (

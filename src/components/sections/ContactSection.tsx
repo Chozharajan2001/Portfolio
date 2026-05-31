@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, Download, Linkedin, Github, Twitter } from 'lucide-react';
+import { 
+    Mail, 
+    Phone, 
+    MapPin, 
+    Send, 
+    Download, 
+    Linkedin, 
+    Github, 
+    Twitter 
+} from 'lucide-react';
 import RobotGuide from '../RobotGuide';
-import emailjs from '@emailjs/browser';
 
 interface ContactSectionProps {
     onNavigate: (section: string) => void;
@@ -18,6 +26,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) => {
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);
+    const [submitError, setSubmitError] = useState('');
 
     useEffect(() => {
         const timer = setTimeout(() => setShowGuide(true), 500);
@@ -34,42 +43,46 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
+        setSubmitError('');
 
         try {
-            // Initialize emailjs with your user ID (get this from your emailjs dashboard)
-            // For production, use environment variables as described in emailjs-setup.md
-            const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID'; // Replace with your EmailJS service ID
-            const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID'; // Replace with your EmailJS template ID
-            const userId = import.meta.env.VITE_EMAILJS_USER_ID || 'YOUR_USER_ID'; // Replace with your EmailJS user ID
+            const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
 
-            // Prepare template parameters
-            const templateParams = {
-                from_name: formData.name,
-                from_email: formData.email,
-                subject: formData.subject,
-                message: formData.message,
-                to_name: 'CHOZHARAJAN M', // Your name
-            };
-
-            // Validate that all required fields are provided
-            if (!serviceId || serviceId === 'YOUR_SERVICE_ID' || !templateId || templateId === 'YOUR_TEMPLATE_ID' || !userId || userId === 'YOUR_USER_ID') {
-                throw new Error('EmailJS credentials are not properly configured. Please follow the setup instructions in emailjs-setup.md');
+            if (!accessKey || accessKey === 'your_access_key_here') {
+                throw new Error('Web3Forms access key not configured. Please check .env file.');
             }
 
-            // Send email using emailjs
-            const result = await emailjs.send(serviceId, templateId, templateParams, userId);
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    access_key: accessKey,
+                    name: formData.name,
+                    email: formData.email,
+                    subject: formData.subject || 'Portfolio Contact Form',
+                    message: formData.message,
+                    from_name: 'Portfolio Website'
+                })
+            });
 
-            console.log('Email sent successfully:', result.text);
-            setIsSubmitting(false);
-            setSubmitSuccess(true);
-            setFormData({ name: '', email: '', subject: '', message: '' });
+            const data = await response.json();
 
-            // Hide success message after 5 seconds
-            setTimeout(() => setSubmitSuccess(false), 5000);
+            if (data.success) {
+                setIsSubmitting(false);
+                setSubmitSuccess(true);
+                setFormData({ name: '', email: '', subject: '', message: '' });
+                
+                setTimeout(() => setSubmitSuccess(false), 5000);
+            } else {
+                throw new Error(data.message || 'Failed to send message');
+            }
         } catch (error) {
-            console.error('Error sending email:', error);
+            console.error('Error sending message:', error);
             setIsSubmitting(false);
-            alert('Failed to send message. Please try again or contact me directly at chozharajan20112001@gmail.com');
+            setSubmitError(error instanceof Error ? error.message : 'Failed to send message. Please try again or contact me directly at chozharajan20112001@gmail.com');
         }
     };
 
@@ -360,7 +373,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) => {
 
                         {/* Portfolio Link */}
                         <motion.a
-                            href="/"
+                            href="https://portfolionew-git-main-chozhas-projects.vercel.app/"
                             whileHover={{ scale: 1.05 }}
                             className="block bg-gradient-to-r from-purple-500/20 to-pink-500/20 p-6 rounded-3xl border border-purple-500/30 text-center cursor-pointer"
                         >

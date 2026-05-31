@@ -1,6 +1,28 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Github, Play, Star, Eye, GitBranch, Shield, Zap, User } from 'lucide-react';
+import { 
+    ExternalLink, 
+    Github, 
+    Play, 
+    Star, 
+    Eye, 
+    GitBranch, 
+    Shield, 
+    Zap, 
+    User, 
+    ChevronDown, 
+    Mail, 
+    Linkedin, 
+    Twitter, 
+    Download, 
+    MapPin, 
+    Send, 
+    Cpu, 
+    Code, 
+    Database, 
+    Palette, 
+    Cog 
+} from 'lucide-react';
 import RobotGuide from '../RobotGuide';
 
 interface ProjectsSectionProps {
@@ -19,13 +41,46 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onNavigate
 
     const projects = [
         {
+            id: 'omnichat',
+            title: 'OmniChat - Multi-Provider AI Chat Platform',
+            category: 'ai',
+            description: 'Built unified interface for 8 AI providers (OpenAI, Anthropic, Google, Mistral, Groq, xAI, DeepSeek, Perplexity) using Vercel AI SDK with streaming responses. Implemented triple-distribution architecture: Desktop (Tauri), Cloud (Railway/Render), Docker from single codebase. Delivered AES-256-GCM encrypted API key storage, dual database support (SQLite/PostgreSQL), and real-time token streaming.',
+            image: 'https://images.unsplash.com/photo-1677442135722-5f11e06a4e62?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+            tech: ['Next.js', 'Vercel AI SDK', 'TypeScript', 'Tauri', 'PostgreSQL', 'SQLite'],
+            stats: { stars: 100, views: 10000, commits: 120 },
+            status: 'production',
+            year: '2024'
+        },
+        {
+            id: 'markdown-editor',
+            title: 'Markdown Editor Pro - Privacy-First Editor',
+            category: 'web',
+            description: 'Architected 100% client-side application using IndexedDB (Dexie.js) with zero server dependencies and full offline PWA support. Integrated Monaco Editor (VS Code engine) with live preview, 17 themes, Mermaid diagrams, and syntax highlighting. Built multi-format export engine generating PDF, Word (.docx), PowerPoint (.pptx), HTML with XSS protection via rehype-sanitize.',
+            image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+            tech: ['React', 'Monaco Editor', 'Dexie.js', 'PWA', 'IndexedDB', 'Tailwind CSS'],
+            stats: { stars: 95, views: 8000, commits: 95 },
+            status: 'production',
+            year: '2024'
+        },
+        {
+            id: 'jobtailor',
+            title: 'JobTailor - AI-Powered Resume Tailoring',
+            category: 'ai',
+            description: 'Developed ATS scoring engine with real-time compatibility analysis and skill gap identification using OpenAI API. Built Kanban-style application CRM with multi-version resume management and analytics tracking callback rates. Implemented JWT authentication, Cloudinary PDF storage, and automated resume generation workflows.',
+            image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+            tech: ['React', 'Node.js', 'MongoDB', 'OpenAI API', 'Cloudinary', 'JWT'],
+            stats: { stars: 90, views: 5000, commits: 65 },
+            status: 'production',
+            year: '2024'
+        },
+        {
             id: 'zatca-compliance',
             title: 'ZATCA Compliance Integration (Live in Production)',
             category: 'enterprise',
-            description: 'Spearheaded the development of a Phase-2 compliant e-invoicing ecosystem for Saudi Arabia (ZATCA). Currently used by live clients with 100% clearance rate for client submissions on first attempt.',
-            image: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800',
+            description: 'Spearheaded the development of a Phase-2 compliant e-invoicing ecosystem for Saudi Arabia (ZATCA). Achieved 100% clearance rate for client submissions on first attempt. Architected UBL 2.1 XML pipeline with OpenSSL signing & AES/RSA encryption, reducing support tickets for merchants.',
+            image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
             tech: ['Node.js', 'Express', 'MongoDB', 'OpenSSL', 'XML Parsers', 'React'],
-            stats: { stars: 100, views: 10000, commits: 120 },
+            stats: { stars: 88, views: 7000, commits: 80 },
             status: 'production',
             year: '2024'
         },
@@ -33,10 +88,21 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onNavigate
             id: 'pos-framework',
             title: 'Multi-Store POS Framework',
             category: 'enterprise',
-            description: 'Architected a scalable core POS engine designed for rapid client onboarding. Includes standard retail logic, but is architected to handle legacy data migration and custom client requirements.',
-            image: 'https://images.pexels.com/photos/4974914/pexels-photo-4974914.jpeg?auto=compress&cs=tinysrgb&w=800',
+            description: 'Architected a scalable core POS engine designed for rapid client onboarding. Includes standard retail logic, but is architected to handle legacy data migration and custom client requirements. Implemented Socket.io real-time sync, RBAC middleware, and multi-location workflows.',
+            image: 'https://images.unsplash.com/photo-1556761175-5973dc0f5d1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
             tech: ['React', 'Zustand', 'Node.js', 'Express.js', 'Socket.io', 'MongoDB'],
-            stats: { stars: 95, views: 8000, commits: 95 },
+            stats: { stars: 85, views: 3000, commits: 40 },
+            status: 'production',
+            year: '2024'
+        },
+        {
+            id: 'low-code-engine',
+            title: 'Dynamic Enterprise Business System',
+            category: 'enterprise',
+            description: 'Designed hybrid RBAC/ABAC authorization engine with field-level permissions, conditional logic, temporal validity, and runtime role composition for enterprise access control. Engineered low-code workflow engine with async/sync lookups, circular dependency detection, conditional field visibility, and auto-fetch chaining for O2C processes.',
+            image: 'https://images.unsplash.com/photo-1555066932-407dcede17a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+            tech: ['React.js', 'Express.js', 'MongoDB', 'Advanced Aggregations', 'RBAC/ABAC'],
+            stats: { stars: 80, views: 2500, commits: 50 },
             status: 'production',
             year: '2024'
         },
@@ -44,55 +110,11 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onNavigate
             id: 'lhdn-compliance',
             title: 'LHDN Compliance Integration',
             category: 'enterprise',
-            description: 'Developed the compliance integration package for Malaysia\'s e-invoicing regulations. Ready for client implementation with adapted XML generation and encryption workflows.',
-            image: 'https://images.pexels.com/photos/11035371/pexels-photo-11035371.jpeg?auto=compress&cs=tinysrgb&w=800',
-            tech: ['Node.js', 'Express', 'OpenSSL', 'Crypto-js'],
-            stats: { stars: 90, views: 5000, commits: 65 },
-            status: 'ready',
-            year: '2024'
-        },
-        {
-            id: 'low-code-engine',
-            title: 'Dynamic Enterprise Business System',
-            category: 'enterprise',
-            description: 'Designed a dynamic Low-code Engine to automate business workflows. Implemented database optimization resulting in 40% reduction in query latency and built a template engine for custom forms.',
-            image: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800',
-            tech: ['React.js', 'Express.js', 'MongoDB', 'Advanced Aggregations'],
-            stats: { stars: 88, views: 7000, commits: 80 },
-            status: 'ongoing',
-            year: '2024'
-        },
-        {
-            id: 'personal-portfolio',
-            title: 'Professional Portfolio',
-            category: 'web',
-            description: 'A high-performance personal brand website with optimized Core Web Vitals, lazy loading, dynamic routing, and SEO meta-tags.',
-            image: 'https://images.pexels.com/photos/4974914/pexels-photo-4974914.jpeg?auto=compress&cs=tinysrgb&w=800',
-            tech: ['Next.js', 'Framer Motion', 'SCSS'],
-            stats: { stars: 85, views: 3000, commits: 40 },
-            status: 'production',
-            year: '2024'
-        },
-        {
-            id: 'markdown-editor',
-            title: 'Markdown Editor & PDF Converter',
-            category: 'web',
-            description: 'A high-performance text editor for developers with PDF/Word/html export capabilities, completely client side and local storage.',
-            image: 'https://images.pexels.com/photos/11035371/pexels-photo-11035371.jpeg?auto=compress&cs=tinysrgb&w=800',
-            tech: ['NEXT js', 'Markdown-IT', 'dexie js', 'Zustand', 'React-PDF'],
-            stats: { stars: 80, views: 2500, commits: 50 },
-            status: 'ongoing',
-            year: '2024'
-        },
-        {
-            id: 'ai-chat-interface',
-            title: 'AI Chat Interface (Next.js)',
-            category: 'ai',
-            description: 'A multi-model chat application allowing users to switch between different LLMs dynamically with streaming APIs for real-time token generation and prompt engineering templates.',
-            image: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800',
-            tech: ['Next.js', 'Tailwind CSS', 'Mastra ai Framework'],
+            description: 'Developed the compliance integration package for Malaysia\'s e-invoicing regulations. Ready for client implementation with adapted XML generation and encryption workflows. Optimized MongoDB aggregation pipelines achieving faster queries and engineered Node.js template engine powering dynamic form generation for enterprise workflows.',
+            image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+            tech: ['Node.js', 'Express', 'OpenSSL', 'Crypto-js', 'MongoDB'],
             stats: { stars: 92, views: 4000, commits: 70 },
-            status: 'ongoing',
+            status: 'production',
             year: '2024'
         }
     ];
@@ -123,7 +145,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onNavigate
         <section className="min-h-screen relative pt-20 px-6 pb-12">
             <RobotGuide
                 character="delta"
-                message="Excellent! I'm DELTA, your project showcase coordinator. I've curated the most impressive implementations from CHOZHARAJAN M's portfolio. From ZATCA compliance systems to enterprise business solutions, each project demonstrates real-world problem-solving with cutting-edge technology!"
+                message="Excellent! I'm DELTA, your project showcase coordinator. I've curated the most impressive implementations from CHOZHARAJAN M's portfolio. From ZATCA compliance systems to AI integration platforms, each project demonstrates real-world problem-solving with cutting-edge technology!"
                 isVisible={showGuide}
                 onComplete={() => setShowGuide(false)}
                 position="right"
@@ -147,7 +169,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onNavigate
                         PROJECT SHOWCASE
                     </motion.h2>
                     <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                        Professional implementations showcasing expertise in MERN stack, Next.js, RegTech compliance, and enterprise solutions.
+                        Professional implementations showcasing expertise in full-stack development, compliance systems, and AI integration.
                     </p>
                 </motion.div>
 
@@ -212,6 +234,10 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onNavigate
                                                 decoding="async"
                                                 width="800"
                                                 height="600"
+                                                onError={(e) => {
+                                                    const target = e.target as HTMLImageElement;
+                                                    target.src = 'https://via.placeholder.com/800x600/1f2937/9ca3af?text=Project+Image';
+                                                }}
                                                 whileHover={{ scale: 1.1 }}
                                                 transition={{ duration: 0.5 }}
                                             />
@@ -357,7 +383,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onNavigate
                     className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6"
                 >
                     {[
-                        { label: 'Projects Delivered', value: '4+', color: 'green' },
+                        { label: 'Projects Delivered', value: '7+', color: 'green' },
                         { label: 'Years Experience', value: '2+', color: 'yellow' },
                         { label: 'RegTech Systems', value: '2+', color: 'purple' },
                     ].map((stat, index) => (
@@ -395,21 +421,21 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onNavigate
                                 color: 'green'
                             },
                             {
-                                title: '40% Performance Improvement',
-                                description: 'Optimized MongoDB aggregation pipelines resulting in 40% faster query execution times',
+                                title: 'Zero-Penalty Deployments',
+                                description: 'Maintained zero-penalty production deployment record across all enterprise systems',
                                 icon: Zap,
                                 color: 'cyan'
                             },
                             {
-                                title: 'Zero-Penalty Production',
-                                description: 'Maintained zero-penalty production deployment record across all enterprise systems',
-                                icon: Star,
+                                title: 'Team Leadership',
+                                description: 'Led engineering teams through Agile sprints, establishing PR review and documentation standards adopted org-wide',
+                                icon: User,
                                 color: 'yellow'
                             },
                             {
-                                title: 'Team Leadership',
-                                description: 'Successfully led 3-developer team across multiple sprint cycles with consistent delivery',
-                                icon: User,
+                                title: 'Performance Optimization',
+                                description: 'Optimized MongoDB aggregation pipelines achieving faster queries and improved system performance',
+                                icon: Zap,
                                 color: 'purple'
                             }
                         ].map((achievement, index) => {

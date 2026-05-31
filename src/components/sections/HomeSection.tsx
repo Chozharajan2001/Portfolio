@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown, Code, Zap, Star } from 'lucide-react';
+import { ChevronDown, Code, Zap, Star, Cpu } from 'lucide-react';
 import RobotGuide from '../RobotGuide';
 
 interface HomeSectionProps {
@@ -12,11 +12,11 @@ const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate }) => {
     const [textIndex, setTextIndex] = useState(0);
 
     const titleTexts = [
-        "APPLICATION DEVELOPER | FULL STACK ENGINEER (MERN)",
-        "SPECIALIZING IN SCALABLE MERN & NEXT.JS ARCHITECTURES",
+        "FULL STACK ENGINEER | AI-INTEGRATED APPLICATIONS",
+        "SPECIALIZING IN REGULATORY COMPLIANCE SYSTEMS",
         "LEADING TEAMS & SOLVING COMPLEX ENGINEERING CHALLENGES",
-        "2 YEARS OF INTENSIVE MERN STACK EXPERIENCE",
-        "TEAM LEAD | PR REVIEWS | AGILE/SCRUM PRACTITIONER"
+        "2+ YEARS OF PRODUCTION-GRADE SYSTEMS EXPERIENCE",
+        "ZATCA/LHDN E-INVOICING SPECIALIST"
     ];
 
     useEffect(() => {
@@ -35,7 +35,7 @@ const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate }) => {
         <section className="min-h-screen flex items-center justify-center relative pt-20 px-6">
             <RobotGuide
                 character="alpha"
-                message="Welcome to my portfolio! I'm ALPHA, your digital guide. I'll help you explore the work of CHOZHARAJAN M, a skilled Application Developer and Full Stack Engineer with 2+ years of experience in scalable MERN and Next.js architectures."
+                message="Welcome to my portfolio! I'm ALPHA, your digital guide. I'll help you explore the work of CHOZHARAJAN M, a skilled Full Stack Engineer with 2+ years of experience in production-grade compliance, POS, and AI systems. He specializes in ZATCA/LHDN e-invoicing regulations, RBAC/ABAC authorization, MongoDB performance optimization, and LLM integrations."
                 isVisible={showGuide}
                 onComplete={() => setShowGuide(false)}
                 position="left"
@@ -89,18 +89,18 @@ const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate }) => {
                     <div className="bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 p-8 rounded-3xl border border-cyan-500/30 backdrop-blur-sm">
                         <motion.div
                             animate={{ rotate: 360 }}
-                            transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                            transition={{ duration: 10, repeat: Infinity, ease: 'linear' }} // Slower rotation to reduce CPU load
                             className="w-32 h-32 mx-auto mb-6 border-4 border-cyan-400 border-dashed rounded-full flex items-center justify-center"
                         >
                             <Code className="w-16 h-16 text-cyan-400" />
                         </motion.div>
 
                         <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-                            High-performance Application Developer and Platform Engineer with 2+ years of intensive experience specializing in scalable MERN stack and Next.js architectures. Proven expertise in RegTech (ZATCA/LHDN) and complex engineering challenges—from cryptographic security and offline-first architecture to real-time socket integrations. Experienced team lead managing 3 developers through sprint cycles, code reviews, and agile delivery.
+                            Full Stack Engineer with 2+ years shipping production-grade compliance, POS, and AI systems. Specialized in ZATCA/LHDN e-invoicing regulations, RBAC/ABAC authorization, MongoDB performance optimization, and LLM integrations. Delivered regulatory clearance, query performance improvements, and led engineering teams across enterprise fintech deployments.
                         </p>
                     </div>
 
-                    {/* Floating icons */}
+                    {/* Floating icons - reduced number and complexity */}
                     {[Zap, Star, Code].map((Icon, index) => (
                         <motion.div
                             key={index}
@@ -160,14 +160,14 @@ const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate }) => {
 
             {/* Animated elements */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                {/* Scanning lines */}
+                {/* Scanning lines - simplified */}
                 <motion.div
                     className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
                     animate={{ x: ['-100%', '100%'] }}
                     transition={{ duration: 3, repeat: Infinity, repeatDelay: 2 }}
                 />
 
-                {/* Corner brackets */}
+                {/* Corner brackets - simplified */}
                 <div className="absolute top-24 left-6 w-12 h-12 border-l-2 border-t-2 border-cyan-400/50" />
                 <div className="absolute top-24 right-6 w-12 h-12 border-r-2 border-t-2 border-cyan-400/50" />
                 <div className="absolute bottom-6 left-6 w-12 h-12 border-l-2 border-b-2 border-cyan-400/50" />
