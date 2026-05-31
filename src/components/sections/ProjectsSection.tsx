@@ -272,9 +272,6 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onNavigate
                                                 <h3 className="text-xl font-bold text-white group-hover:text-green-300 transition-colors">
                                                     {project.title}
                                                 </h3>
-                                                <span className="text-xs text-gray-400 bg-gray-700/50 px-2 py-1 rounded">
-                                                    {project.year}
-                                                </span>
                                             </div>
 
                                             <p className="text-gray-400 mb-4 leading-relaxed">
