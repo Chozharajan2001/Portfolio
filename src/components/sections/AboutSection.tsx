@@ -17,7 +17,8 @@ const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
         return () => clearTimeout(timer);
     }, []);
 
-    const tabs: { id: TabId; label: string; icon: any }[] = [
+
+    const tabs: { id: TabId; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
         { id: 'story', label: 'My Story', icon: User },
         { id: 'mission', label: 'Mission', icon: Target },
         { id: 'vision', label: 'Vision', icon: Rocket },

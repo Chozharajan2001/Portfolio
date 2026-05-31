@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Code, Database, Palette, Cog, Zap, Shield, User } from 'lucide-react';
 import RobotGuide from '../RobotGuide';
@@ -7,9 +7,138 @@ interface SkillsSectionProps {
     onNavigate: (section: string) => void;
 }
 
+type CategoryId = 'frontend' | 'backend' | 'devops' | 'tools' | 'regtech' | 'devtools' | 'languages' | 'exposure' | 'softskills';
+type Skill = { name: string; level: number; description: string };
+type SkillCategory = { title: string; icon: React.ComponentType<{ className?: string }>; color: string; skills: Skill[] };
+
+const skillCategories: Record<CategoryId, SkillCategory> = {
+    frontend: {
+        title: 'Frontend Engineering',
+        icon: Palette,
+        color: 'cyan',
+        skills: [
+            { name: 'React.js', level: 95, description: 'Component architecture & state management' },
+            { name: 'Next.js (SSR/SSG)', level: 90, description: 'Server-side rendering and static generation' },
+            { name: 'Zustand', level: 85, description: 'State management solution' },
+            { name: 'Context API', level: 88, description: 'Global state management' },
+            { name: 'Ant Design / Material UI', level: 85, description: 'UI libraries & design systems' },
+            { name: 'Tailwind CSS', level: 90, description: 'Utility-first CSS framework' },
+            { name: 'shadcn/ui', level: 85, description: 'UI component library' },
+            { name: 'Responsive Web Design', level: 90, description: 'Mobile-first, adaptive layouts' },
+            { name: 'Performance Tuning (useMemo, React.memo)', level: 88, description: 'Rendering optimization techniques' },
+        ]
+    },
+    backend: {
+        title: 'Backend Architecture',
+        icon: Database,
+        color: 'blue',
+        skills: [
+            { name: 'Node.js', level: 92, description: 'Runtime environment' },
+            { name: 'Express.js', level: 90, description: 'Web application framework' },
+            { name: 'Fastify', level: 75, description: 'High-performance web framework' },
+            { name: 'Bun.js', level: 70, description: 'JavaScript runtime and toolchain' },
+            { name: 'RESTful APIs', level: 90, description: 'API design and implementation' },
+            { name: 'GraphQL', level: 65, description: 'Query language for APIs' },
+            { name: 'Microservices Architecture', level: 80, description: 'Decentralized system design' },
+            { name: 'Server-Side Rendering (SSR)', level: 85, description: 'Rendering on the server' },
+            { name: 'Redis', level: 70, description: 'In-memory data structure store' },
+        ]
+    },
+    devops: {
+        title: 'Real-Time Systems',
+        icon: Cog,
+        color: 'green',
+        skills: [
+            { name: 'WebSockets (Socket.io)', level: 85, description: 'Real-time bidirectional communication' },
+            { name: 'Event-Driven Architecture', level: 80, description: 'Asynchronous event handling' },
+            { name: 'Live Dashboarding', level: 75, description: 'Real-time data visualization' },
+        ]
+    },
+    tools: {
+        title: 'Database & Security',
+        icon: Code,
+        color: 'purple',
+        skills: [
+            { name: 'MongoDB', level: 90, description: 'NoSQL database management' },
+            { name: 'PostgreSQL', level: 80, description: 'Relational database management' },
+            { name: 'Prisma', level: 85, description: 'Modern database toolkit' },
+            { name: 'Mongoose', level: 88, description: 'ODM for MongoDB' },
+            { name: 'Advanced Aggregation Pipelines', level: 85, description: 'Complex data processing' },
+            { name: 'Database Indexing', level: 82, description: 'Performance optimization' },
+            { name: 'JWT', level: 88, description: 'Token-based authentication' },
+            { name: 'Argon2', level: 85, description: 'Password hashing algorithm' },
+            { name: 'Bcrypt', level: 85, description: 'Password hashing' },
+            { name: 'OpenSSL', level: 80, description: 'Cryptographic toolkit' },
+            { name: 'Crypto-js', level: 78, description: 'JavaScript cryptography' },
+            { name: 'XML Canonicalization', level: 75, description: 'Standardizing XML documents' },
+            { name: 'UBL 2.1 Standards', level: 75, description: 'Universal Business Language' },
+            { name: 'Role-Based Access Control (RBAC)', level: 85, description: 'Permission-based security' },
+        ]
+    },
+    regtech: {
+        title: 'RegTech & Compliance',
+        icon: Shield,
+        color: 'red',
+        skills: [
+            { name: 'ZATCA (Saudi Arabia)', level: 90, description: 'Saudi electronic invoicing compliance' },
+            { name: 'LHDN (Malaysia)', level: 85, description: 'Malaysian e-invoicing regulations' },
+            { name: 'Government Compliance Systems', level: 88, description: 'Zero-trust security architectures' },
+            { name: 'Tax Regulations Implementation', level: 85, description: 'Phase 2 compliance systems' },
+        ]
+    },
+    devtools: {
+        title: 'DevOps & Tools',
+        icon: Cog,
+        color: 'yellow',
+        skills: [
+            { name: 'Docker', level: 85, description: 'Containerization platform' },
+            { name: 'AWS (EC2, S3, Lambda, RDS, IAM)', level: 75, description: 'Amazon Web Services suite' },
+            { name: 'Vercel', level: 85, description: 'Deployment platform' },
+            { name: 'Railway', level: 70, description: 'Platform for deploying apps' },
+            { name: 'Git/GitHub/GitLab', level: 85, description: 'Version control and collaboration' },
+            { name: 'CI/CD Pipelines', level: 75, description: 'Continuous integration/delivery' },
+            { name: 'GitHub Actions', level: 70, description: 'Automated workflows' },
+        ]
+    },
+    languages: {
+        title: 'Programming Languages',
+        icon: Code,
+        color: 'indigo',
+        skills: [
+            { name: 'JavaScript', level: 95, description: 'Core language for web development' },
+            { name: 'TypeScript', level: 90, description: 'Type-safe JavaScript superset' },
+        ]
+    },
+    exposure: {
+        title: 'AI & LLM Integration',
+        icon: Zap,
+        color: 'orange',
+        skills: [
+            { name: 'Vercel AI SDK', level: 85, description: 'AI SDK for building LLM applications' },
+            { name: 'LLM Integration', level: 80, description: 'Integrating various large language models' },
+            { name: 'Prompt Engineering', level: 75, description: 'Crafting effective prompts' },
+            { name: 'Streaming APIs', level: 80, description: 'Real-time token streaming' },
+        ]
+    },
+    softskills: {
+        title: 'Soft Skills',
+        icon: User,
+        color: 'pink',
+        skills: [
+            { name: 'Rapid Learner', level: 95, description: 'Quickly adapt to new technologies and frameworks' },
+            { name: 'Analytical Thinking', level: 92, description: 'Systematic problem-solving approach' },
+            { name: 'Team Leadership', level: 88, description: 'Led engineering teams with agile methodologies' },
+            { name: 'Production Deployments', level: 90, description: 'Zero-penalty deployment record' },
+            { name: 'Agile/Scrum', level: 90, description: 'Sprint planning and iterative development' },
+            { name: 'Cross-Team Collaboration', level: 87, description: 'Effective communication across departments' },
+        ]
+    },
+};
+
+const categories = Object.keys(skillCategories) as CategoryId[];
+
 const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) => {
     const [showGuide, setShowGuide] = useState(false);
-    type CategoryId = 'frontend' | 'backend' | 'devops' | 'tools' | 'regtech' | 'devtools' | 'languages' | 'exposure' | 'softskills';
     const [activeCategory, setActiveCategory] = useState<CategoryId>('frontend');
     const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
 
@@ -18,134 +147,6 @@ const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) 
         return () => clearTimeout(timer);
     }, []);
 
-    type Skill = { name: string; level: number; description: string };
-    type SkillCategory = { title: string; icon: any; color: string; skills: Skill[] };
-
-    const skillCategories: Record<CategoryId, SkillCategory> = {
-        frontend: {
-            title: 'Frontend Engineering',
-            icon: Palette,
-            color: 'cyan',
-            skills: [
-                { name: 'React.js', level: 95, description: 'Component architecture & state management' },
-                { name: 'Next.js (SSR/SSG)', level: 90, description: 'Server-side rendering and static generation' },
-                { name: 'Zustand', level: 85, description: 'State management solution' },
-                { name: 'Context API', level: 88, description: 'Global state management' },
-                { name: 'Ant Design / Material UI', level: 85, description: 'UI libraries & design systems' },
-                { name: 'Tailwind CSS', level: 90, description: 'Utility-first CSS framework' },
-                { name: 'shadcn/ui', level: 85, description: 'UI component library' },
-                { name: 'Responsive Web Design', level: 90, description: 'Mobile-first, adaptive layouts' },
-                { name: 'Performance Tuning (useMemo, React.memo)', level: 88, description: 'Rendering optimization techniques' },
-            ]
-        },
-        backend: {
-            title: 'Backend Architecture',
-            icon: Database,
-            color: 'blue',
-            skills: [
-                { name: 'Node.js', level: 92, description: 'Runtime environment' },
-                { name: 'Express.js', level: 90, description: 'Web application framework' },
-                { name: 'Fastify', level: 75, description: 'High-performance web framework' },
-                { name: 'Bun.js', level: 70, description: 'JavaScript runtime and toolchain' },
-                { name: 'RESTful APIs', level: 90, description: 'API design and implementation' },
-                { name: 'GraphQL', level: 65, description: 'Query language for APIs' },
-                { name: 'Microservices Architecture', level: 80, description: 'Decentralized system design' },
-                { name: 'Server-Side Rendering (SSR)', level: 85, description: 'Rendering on the server' },
-                { name: 'Redis', level: 70, description: 'In-memory data structure store' },
-            ]
-        },
-        devops: {
-            title: 'Real-Time Systems',
-            icon: Cog,
-            color: 'green',
-            skills: [
-                { name: 'WebSockets (Socket.io)', level: 85, description: 'Real-time bidirectional communication' },
-                { name: 'Event-Driven Architecture', level: 80, description: 'Asynchronous event handling' },
-                { name: 'Live Dashboarding', level: 75, description: 'Real-time data visualization' },
-            ]
-        },
-        tools: {
-            title: 'Database & Security',
-            icon: Code,
-            color: 'purple',
-            skills: [
-                { name: 'MongoDB', level: 90, description: 'NoSQL database management' },
-                { name: 'PostgreSQL', level: 80, description: 'Relational database management' },
-                { name: 'Prisma', level: 85, description: 'Modern database toolkit' },
-                { name: 'Mongoose', level: 88, description: 'ODM for MongoDB' },
-                { name: 'Advanced Aggregation Pipelines', level: 85, description: 'Complex data processing' },
-                { name: 'Database Indexing', level: 82, description: 'Performance optimization' },
-                { name: 'JWT', level: 88, description: 'Token-based authentication' },
-                { name: 'Argon2', level: 85, description: 'Password hashing algorithm' },
-                { name: 'Bcrypt', level: 85, description: 'Password hashing' },
-                { name: 'OpenSSL', level: 80, description: 'Cryptographic toolkit' },
-                { name: 'Crypto-js', level: 78, description: 'JavaScript cryptography' },
-                { name: 'XML Canonicalization', level: 75, description: 'Standardizing XML documents' },
-                { name: 'UBL 2.1 Standards', level: 75, description: 'Universal Business Language' },
-                { name: 'Role-Based Access Control (RBAC)', level: 85, description: 'Permission-based security' },
-            ]
-        },
-        regtech: {
-            title: 'RegTech & Compliance',
-            icon: Shield,
-            color: 'red',
-            skills: [
-                { name: 'ZATCA (Saudi Arabia)', level: 90, description: 'Saudi electronic invoicing compliance' },
-                { name: 'LHDN (Malaysia)', level: 85, description: 'Malaysian e-invoicing regulations' },
-                { name: 'Government Compliance Systems', level: 88, description: 'Zero-trust security architectures' },
-                { name: 'Tax Regulations Implementation', level: 85, description: 'Phase 2 compliance systems' },
-            ]
-        },
-        devtools: {
-            title: 'DevOps & Tools',
-            icon: Cog,
-            color: 'yellow',
-            skills: [
-                { name: 'Docker', level: 85, description: 'Containerization platform' },
-                { name: 'AWS (EC2, S3, Lambda, RDS, IAM)', level: 75, description: 'Amazon Web Services suite' },
-                { name: 'Vercel', level: 85, description: 'Deployment platform' },
-                { name: 'Railway', level: 70, description: 'Platform for deploying apps' },
-                { name: 'Git/GitHub/GitLab', level: 85, description: 'Version control and collaboration' },
-                { name: 'CI/CD Pipelines', level: 75, description: 'Continuous integration/delivery' },
-                { name: 'GitHub Actions', level: 70, description: 'Automated workflows' },
-            ]
-        },
-        languages: {
-            title: 'Programming Languages',
-            icon: Code,
-            color: 'indigo',
-            skills: [
-                { name: 'JavaScript', level: 95, description: 'Core language for web development' },
-                { name: 'TypeScript', level: 90, description: 'Type-safe JavaScript superset' },
-            ]
-        },
-        exposure: {
-            title: 'AI & LLM Integration',
-            icon: Zap,
-            color: 'orange',
-            skills: [
-                { name: 'Vercel AI SDK', level: 85, description: 'AI SDK for building LLM applications' },
-                { name: 'LLM Integration', level: 80, description: 'Integrating various large language models' },
-                { name: 'Prompt Engineering', level: 75, description: 'Crafting effective prompts' },
-                { name: 'Streaming APIs', level: 80, description: 'Real-time token streaming' },
-            ]
-        },
-        softskills: {
-            title: 'Soft Skills',
-            icon: User,
-            color: 'pink',
-            skills: [
-                { name: 'Rapid Learner', level: 95, description: 'Quickly adapt to new technologies and frameworks' },
-                { name: 'Analytical Thinking', level: 92, description: 'Systematic problem-solving approach' },
-                { name: 'Team Leadership', level: 88, description: 'Led engineering teams with agile methodologies' },
-                { name: 'Production Deployments', level: 90, description: 'Zero-penalty deployment record' },
-                { name: 'Agile/Scrum', level: 90, description: 'Sprint planning and iterative development' },
-                { name: 'Cross-Team Collaboration', level: 87, description: 'Effective communication across departments' },
-            ]
-        },
-    };
-
-    const categories = useMemo(() => Object.keys(skillCategories) as CategoryId[], []);
 
     return (
         <section className="min-h-screen flex items-center justify-center relative pt-20 px-6">

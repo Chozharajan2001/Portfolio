@@ -192,6 +192,11 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) => {
                                         onSubmit={handleSubmit}
                                         className="space-y-6"
                                     >
+                                        {submitError && (
+                                            <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl text-red-300 text-sm">
+                                                {submitError}
+                                            </div>
+                                        )}
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                             <motion.div
                                                 whileFocus={{ scale: 1.02 }}
@@ -295,7 +300,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) => {
                             <h3 className="text-3xl font-bold text-orange-400 mb-6">Contact Information</h3>
 
                             <div className="space-y-4">
-                                {contactInfo.map((info, index) => {
+                                {contactInfo.map((info) => {
                                     const Icon = info.icon;
 
                                     return (
@@ -323,7 +328,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) => {
                             <h3 className="text-3xl font-bold text-orange-400 mb-6">Connect Online</h3>
 
                             <div className="grid grid-cols-1 gap-4">
-                                {socialLinks.map((social, index) => {
+                                {socialLinks.map((social) => {
                                     const Icon = social.icon;
 
                                     return (

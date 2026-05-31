@@ -31,7 +31,7 @@ function App() {
         return () => clearTimeout(timer);
     }, []);
 
-    const handleSectionChange = async (newSection: string) => {
+    const handleSectionChange = useCallback(async (newSection: string) => {
         if (newSection === currentSection || isTransitioning) return;
 
         setIsTransitioning(true);
@@ -40,35 +40,55 @@ function App() {
             setCurrentSection(newSection);
             setIsTransitioning(false);
         }, 800);
-    };
+    }, [currentSection, isTransitioning]);
 
-    const goToNextSection = () => {
+    const goToNextSection = useCallback(() => {
         const currentIndex = sections.indexOf(currentSection);
         const nextSection = currentIndex < sections.length - 1 ? sections[currentIndex + 1] : sections[0];
         handleSectionChange(nextSection);
-    };
+    }, [currentSection, handleSectionChange]);
 
-    const goToPrevSection = () => {
+    const goToPrevSection = useCallback(() => {
         const currentIndex = sections.indexOf(currentSection);
         const prevSection = currentIndex > 0 ? sections[currentIndex - 1] : sections[sections.length - 1];
         handleSectionChange(prevSection);
-    };
+    }, [currentSection, handleSectionChange]);
 
-    // Keyboard navigation
+    // Keyboard navigation - FIXED to respect input fields
     const handleKeyPress = useCallback((e: KeyboardEvent) => {
         if (isTransitioning || isLoading) return;
+
+        // Check if the event target is an input, textarea, or other editable element
+        const target = e.target as HTMLElement;
+        const isInputField = target.tagName === 'INPUT' || 
+                           target.tagName === 'TEXTAREA' || 
+                           target.tagName === 'SELECT' ||
+                           target.contentEditable === 'true';
+        
+        // Only navigate if NOT in an input field
+        if (isInputField) {
+            return; // Allow normal input behavior
+        }
 
         switch (e.key) {
             case 'ArrowRight':
             case 'ArrowDown':
-            case ' ': // Spacebar
-                e.preventDefault();
+                e.preventDefault(); // Prevent default scrolling behavior when navigating
                 goToNextSection();
                 break;
             case 'ArrowLeft':
             case 'ArrowUp':
-                e.preventDefault();
+                e.preventDefault(); // Prevent default scrolling behavior when navigating
                 goToPrevSection();
+                break;
+            case ' ':
+                // Only navigate with space if not in an input field and not pressing space in other contexts
+                if (target.tagName === 'BUTTON' || target.tagName === 'A') {
+                    // Allow space to activate buttons/links as normal
+                    return;
+                }
+                e.preventDefault();
+                goToNextSection();
                 break;
             case 'Home':
                 e.preventDefault();
@@ -81,7 +101,7 @@ function App() {
             default:
                 break;
         }
-    }, [currentSection, isTransitioning, isLoading]);
+    }, [isTransitioning, isLoading, goToNextSection, goToPrevSection, handleSectionChange]);
 
     useEffect(() => {
         window.addEventListener('keydown', handleKeyPress);
@@ -120,7 +140,7 @@ function App() {
         return <LoadingScreen onComplete={() => setIsLoading(false)} />;
     }
 
-    const currentIndex = sections.indexOf(currentSection);
+
 
     return (
         <div className="min-h-screen bg-black text-white overflow-hidden relative">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
     ExternalLink, 
@@ -9,25 +9,100 @@ import {
     GitBranch, 
     Shield, 
     Zap, 
-    User, 
-    ChevronDown, 
-    Mail, 
-    Linkedin, 
-    Twitter, 
-    Download, 
-    MapPin, 
-    Send, 
-    Cpu, 
-    Code, 
-    Database, 
-    Palette, 
-    Cog 
+    User
 } from 'lucide-react';
 import RobotGuide from '../RobotGuide';
 
 interface ProjectsSectionProps {
     onNavigate: (section: string) => void;
 }
+
+const projects = [
+    {
+        id: 'omnichat',
+        title: 'OmniChat - Multi-Provider AI Chat Platform',
+        category: 'ai',
+        description: 'Built unified interface for 8 AI providers (OpenAI, Anthropic, Google, Mistral, Groq, xAI, DeepSeek, Perplexity) using Vercel AI SDK with streaming responses. Implemented triple-distribution architecture: Desktop (Tauri), Cloud (Railway/Render), Docker from single codebase. Delivered AES-256-GCM encrypted API key storage, dual database support (SQLite/PostgreSQL), and real-time token streaming.',
+        image: 'https://images.unsplash.com/photo-1677442135722-5f11e06a4e62?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+        tech: ['Next.js', 'Vercel AI SDK', 'TypeScript', 'Tauri', 'PostgreSQL', 'SQLite'],
+        stats: { stars: 100, views: 10000, commits: 120 },
+        status: 'production',
+        year: '2024'
+    },
+    {
+        id: 'markdown-editor',
+        title: 'Markdown Editor Pro - Privacy-First Editor',
+        category: 'web',
+        description: 'Architected 100% client-side application using IndexedDB (Dexie.js) with zero server dependencies and full offline PWA support. Integrated Monaco Editor (VS Code engine) with live preview, 17 themes, Mermaid diagrams, and syntax highlighting. Built multi-format export engine generating PDF, Word (.docx), PowerPoint (.pptx), HTML with XSS protection via rehype-sanitize.',
+        image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+        tech: ['React', 'Monaco Editor', 'Dexie.js', 'PWA', 'IndexedDB', 'Tailwind CSS'],
+        stats: { stars: 95, views: 8000, commits: 95 },
+        status: 'production',
+        year: '2024'
+    },
+    {
+        id: 'jobtailor',
+        title: 'JobTailor - AI-Powered Resume Tailoring',
+        category: 'ai',
+        description: 'Developed ATS scoring engine with real-time compatibility analysis and skill gap identification using OpenAI API. Built Kanban-style application CRM with multi-version resume management and analytics tracking callback rates. Implemented JWT authentication, Cloudinary PDF storage, and automated resume generation workflows.',
+        image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+        tech: ['React', 'Node.js', 'MongoDB', 'OpenAI API', 'Cloudinary', 'JWT'],
+        stats: { stars: 90, views: 5000, commits: 65 },
+        status: 'production',
+        year: '2024'
+    },
+    {
+        id: 'zatca-compliance',
+        title: 'ZATCA Compliance Integration (Live in Production)',
+        category: 'enterprise',
+        description: 'Spearheaded the development of a Phase-2 compliant e-invoicing ecosystem for Saudi Arabia (ZATCA). Achieved 100% clearance rate for client submissions on first attempt. Architected UBL 2.1 XML pipeline with OpenSSL signing & AES/RSA encryption, reducing support tickets for merchants.',
+        image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+        tech: ['Node.js', 'Express', 'MongoDB', 'OpenSSL', 'XML Parsers', 'React'],
+        stats: { stars: 88, views: 7000, commits: 80 },
+        status: 'production',
+        year: '2024'
+    },
+    {
+        id: 'pos-framework',
+        title: 'Multi-Store POS Framework',
+        category: 'enterprise',
+        description: 'Architected a scalable core POS engine designed for rapid client onboarding. Includes standard retail logic, but is architected to handle legacy data migration and custom client requirements. Implemented Socket.io real-time sync, RBAC middleware, and multi-location workflows.',
+        image: 'https://images.unsplash.com/photo-1556761175-5973dc0f5d1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+        tech: ['React', 'Zustand', 'Node.js', 'Express.js', 'Socket.io', 'MongoDB'],
+        stats: { stars: 85, views: 3000, commits: 40 },
+        status: 'production',
+        year: '2024'
+    },
+    {
+        id: 'low-code-engine',
+        title: 'Dynamic Enterprise Business System',
+        category: 'enterprise',
+        description: 'Designed hybrid RBAC/ABAC authorization engine with field-level permissions, conditional logic, temporal validity, and runtime role composition for enterprise access control. Engineered low-code workflow engine with async/sync lookups, circular dependency detection, conditional field visibility, and auto-fetch chaining for O2C processes.',
+        image: 'https://images.unsplash.com/photo-1555066932-407dcede17a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+        tech: ['React.js', 'Express.js', 'MongoDB', 'Advanced Aggregations', 'RBAC/ABAC'],
+        stats: { stars: 80, views: 2500, commits: 50 },
+        status: 'production',
+        year: '2024'
+    },
+    {
+        id: 'lhdn-compliance',
+        title: 'LHDN Compliance Integration',
+        category: 'enterprise',
+        description: 'Developed the compliance integration package for Malaysia\'s e-invoicing regulations. Ready for client implementation with adapted XML generation and encryption workflows. Optimized MongoDB aggregation pipelines achieving faster queries and engineered Node.js template engine powering dynamic form generation for enterprise workflows.',
+        image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+        tech: ['Node.js', 'Express', 'OpenSSL', 'Crypto-js', 'MongoDB'],
+        stats: { stars: 92, views: 4000, commits: 70 },
+        status: 'production',
+        year: '2024'
+    }
+];
+
+const filters = [
+    { id: 'all', label: 'All Projects' },
+    { id: 'enterprise', label: 'Enterprise Solutions' },
+    { id: 'web', label: 'Web Apps' },
+    { id: 'ai', label: 'AI/ML Projects' }
+];
 
 const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onNavigate }) => {
     const [showGuide, setShowGuide] = useState(false);
@@ -39,98 +114,12 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onNavigate
         return () => clearTimeout(timer);
     }, []);
 
-    const projects = [
-        {
-            id: 'omnichat',
-            title: 'OmniChat - Multi-Provider AI Chat Platform',
-            category: 'ai',
-            description: 'Built unified interface for 8 AI providers (OpenAI, Anthropic, Google, Mistral, Groq, xAI, DeepSeek, Perplexity) using Vercel AI SDK with streaming responses. Implemented triple-distribution architecture: Desktop (Tauri), Cloud (Railway/Render), Docker from single codebase. Delivered AES-256-GCM encrypted API key storage, dual database support (SQLite/PostgreSQL), and real-time token streaming.',
-            image: 'https://images.unsplash.com/photo-1677442135722-5f11e06a4e62?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-            tech: ['Next.js', 'Vercel AI SDK', 'TypeScript', 'Tauri', 'PostgreSQL', 'SQLite'],
-            stats: { stars: 100, views: 10000, commits: 120 },
-            status: 'production',
-            year: '2024'
-        },
-        {
-            id: 'markdown-editor',
-            title: 'Markdown Editor Pro - Privacy-First Editor',
-            category: 'web',
-            description: 'Architected 100% client-side application using IndexedDB (Dexie.js) with zero server dependencies and full offline PWA support. Integrated Monaco Editor (VS Code engine) with live preview, 17 themes, Mermaid diagrams, and syntax highlighting. Built multi-format export engine generating PDF, Word (.docx), PowerPoint (.pptx), HTML with XSS protection via rehype-sanitize.',
-            image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-            tech: ['React', 'Monaco Editor', 'Dexie.js', 'PWA', 'IndexedDB', 'Tailwind CSS'],
-            stats: { stars: 95, views: 8000, commits: 95 },
-            status: 'production',
-            year: '2024'
-        },
-        {
-            id: 'jobtailor',
-            title: 'JobTailor - AI-Powered Resume Tailoring',
-            category: 'ai',
-            description: 'Developed ATS scoring engine with real-time compatibility analysis and skill gap identification using OpenAI API. Built Kanban-style application CRM with multi-version resume management and analytics tracking callback rates. Implemented JWT authentication, Cloudinary PDF storage, and automated resume generation workflows.',
-            image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-            tech: ['React', 'Node.js', 'MongoDB', 'OpenAI API', 'Cloudinary', 'JWT'],
-            stats: { stars: 90, views: 5000, commits: 65 },
-            status: 'production',
-            year: '2024'
-        },
-        {
-            id: 'zatca-compliance',
-            title: 'ZATCA Compliance Integration (Live in Production)',
-            category: 'enterprise',
-            description: 'Spearheaded the development of a Phase-2 compliant e-invoicing ecosystem for Saudi Arabia (ZATCA). Achieved 100% clearance rate for client submissions on first attempt. Architected UBL 2.1 XML pipeline with OpenSSL signing & AES/RSA encryption, reducing support tickets for merchants.',
-            image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-            tech: ['Node.js', 'Express', 'MongoDB', 'OpenSSL', 'XML Parsers', 'React'],
-            stats: { stars: 88, views: 7000, commits: 80 },
-            status: 'production',
-            year: '2024'
-        },
-        {
-            id: 'pos-framework',
-            title: 'Multi-Store POS Framework',
-            category: 'enterprise',
-            description: 'Architected a scalable core POS engine designed for rapid client onboarding. Includes standard retail logic, but is architected to handle legacy data migration and custom client requirements. Implemented Socket.io real-time sync, RBAC middleware, and multi-location workflows.',
-            image: 'https://images.unsplash.com/photo-1556761175-5973dc0f5d1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-            tech: ['React', 'Zustand', 'Node.js', 'Express.js', 'Socket.io', 'MongoDB'],
-            stats: { stars: 85, views: 3000, commits: 40 },
-            status: 'production',
-            year: '2024'
-        },
-        {
-            id: 'low-code-engine',
-            title: 'Dynamic Enterprise Business System',
-            category: 'enterprise',
-            description: 'Designed hybrid RBAC/ABAC authorization engine with field-level permissions, conditional logic, temporal validity, and runtime role composition for enterprise access control. Engineered low-code workflow engine with async/sync lookups, circular dependency detection, conditional field visibility, and auto-fetch chaining for O2C processes.',
-            image: 'https://images.unsplash.com/photo-1555066932-407dcede17a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-            tech: ['React.js', 'Express.js', 'MongoDB', 'Advanced Aggregations', 'RBAC/ABAC'],
-            stats: { stars: 80, views: 2500, commits: 50 },
-            status: 'production',
-            year: '2024'
-        },
-        {
-            id: 'lhdn-compliance',
-            title: 'LHDN Compliance Integration',
-            category: 'enterprise',
-            description: 'Developed the compliance integration package for Malaysia\'s e-invoicing regulations. Ready for client implementation with adapted XML generation and encryption workflows. Optimized MongoDB aggregation pipelines achieving faster queries and engineered Node.js template engine powering dynamic form generation for enterprise workflows.',
-            image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-            tech: ['Node.js', 'Express', 'OpenSSL', 'Crypto-js', 'MongoDB'],
-            stats: { stars: 92, views: 4000, commits: 70 },
-            status: 'production',
-            year: '2024'
-        }
-    ];
-
-    const filters = [
-        { id: 'all', label: 'All Projects' },
-        { id: 'enterprise', label: 'Enterprise Solutions' },
-        { id: 'web', label: 'Web Apps' },
-        { id: 'ai', label: 'AI/ML Projects' }
-    ];
-
     const filteredProjects = useMemo(() => {
         return filter === 'all'
             ? projects
             : projects.filter(project => project.category === filter);
     }, [filter]);
+
 
     const getStatusColor = (status: string) => {
         switch (status) {

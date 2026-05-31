@@ -1,6 +1,7 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, Zap, Eye, Cpu } from 'lucide-react';
+
 
 interface RobotGuideProps {
     character: 'alpha' | 'beta' | 'gamma' | 'delta' | 'omega';

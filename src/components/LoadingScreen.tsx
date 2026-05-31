@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Cpu, Zap, Eye } from 'lucide-react';
+import { Cpu } from 'lucide-react';
+
 
 interface LoadingScreenProps {
     onComplete: () => void;

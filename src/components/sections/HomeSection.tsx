@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown, Code, Zap, Star, Cpu } from 'lucide-react';
+import { Code, Zap, Star } from 'lucide-react';
 import RobotGuide from '../RobotGuide';
 
 interface HomeSectionProps {
     onNavigate: (section: string) => void;
 }
 
+const titleTexts = [
+    "FULL STACK ENGINEER | AI-INTEGRATED APPLICATIONS",
+    "SPECIALIZING IN REGULATORY COMPLIANCE SYSTEMS",
+    "LEADING TEAMS & SOLVING COMPLEX ENGINEERING CHALLENGES",
+    "2+ YEARS OF PRODUCTION-GRADE SYSTEMS EXPERIENCE",
+    "ZATCA/LHDN E-INVOICING SPECIALIST"
+];
+
 const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate }) => {
     const [showGuide, setShowGuide] = useState(false);
     const [textIndex, setTextIndex] = useState(0);
-
-    const titleTexts = [
-        "FULL STACK ENGINEER | AI-INTEGRATED APPLICATIONS",
-        "SPECIALIZING IN REGULATORY COMPLIANCE SYSTEMS",
-        "LEADING TEAMS & SOLVING COMPLEX ENGINEERING CHALLENGES",
-        "2+ YEARS OF PRODUCTION-GRADE SYSTEMS EXPERIENCE",
-        "ZATCA/LHDN E-INVOICING SPECIALIST"
-    ];
 
     useEffect(() => {
         const timer = setTimeout(() => setShowGuide(true), 1000);
@@ -30,6 +30,7 @@ const HomeSection: React.FC<HomeSectionProps> = ({ onNavigate }) => {
         }, 3000);
         return () => clearInterval(interval);
     }, []);
+
 
     return (
         <section className="min-h-screen flex items-center justify-center relative pt-20 px-6">
