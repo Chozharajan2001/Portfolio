@@ -104,6 +104,64 @@ const filters = [
     { id: 'ai', label: 'AI/ML Projects' }
 ];
 
+const getStatusBadgeClasses = (status: string) => {
+    switch (status) {
+        case 'production':
+            return 'bg-green-500/20 text-green-300 border-green-500/40';
+        case 'beta':
+            return 'bg-orange-500/20 text-orange-300 border-orange-500/40';
+        case 'development':
+            return 'bg-blue-500/20 text-blue-300 border-blue-500/40';
+        default:
+            return 'bg-gray-500/20 text-gray-300 border-gray-500/40';
+    }
+};
+
+const getStatColorClass = (color: string) => {
+    switch (color) {
+        case 'green': return 'text-green-400';
+        case 'yellow': return 'text-yellow-400';
+        case 'purple': return 'text-purple-400';
+        case 'cyan': return 'text-cyan-400';
+        default: return 'text-gray-400';
+    }
+};
+
+const getAchievementStyles = (color: string) => {
+    switch (color) {
+        case 'green':
+            return {
+                bg: 'bg-green-500/20',
+                text: 'text-green-400',
+                title: 'text-green-300'
+            };
+        case 'cyan':
+            return {
+                bg: 'bg-cyan-500/20',
+                text: 'text-cyan-400',
+                title: 'text-cyan-300'
+            };
+        case 'yellow':
+            return {
+                bg: 'bg-yellow-500/20',
+                text: 'text-yellow-400',
+                title: 'text-yellow-300'
+            };
+        case 'purple':
+            return {
+                bg: 'bg-purple-500/20',
+                text: 'text-purple-400',
+                title: 'text-purple-300'
+            };
+        default:
+            return {
+                bg: 'bg-gray-500/20',
+                text: 'text-gray-400',
+                title: 'text-gray-300'
+            };
+    }
+};
+
 const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onNavigate }) => {
     const [showGuide, setShowGuide] = useState(false);
     const [selectedProject, setSelectedProject] = useState<string | null>(null);
@@ -121,14 +179,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onNavigate
     }, [filter]);
 
 
-    const getStatusColor = (status: string) => {
-        switch (status) {
-            case 'production': return 'green';
-            case 'beta': return 'orange';
-            case 'development': return 'blue';
-            default: return 'gray';
-        }
-    };
+
 
     return (
         <section className="min-h-screen relative pt-24 pb-12 px-4 sm:px-6">
@@ -200,8 +251,6 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onNavigate
                         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
                     >
                         {filteredProjects.map((project, index) => {
-                            const statusColor = getStatusColor(project.status);
-
                             return (
                                 <motion.div
                                     key={project.id}
@@ -236,7 +285,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onNavigate
 
                                             {/* Status Badge - GPU CSS animations */}
                                             <div
-                                                className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold bg-${statusColor}-500/20 text-${statusColor}-300 border border-${statusColor}-500/40 animate-badge-glow`}
+                                                className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold ${getStatusBadgeClasses(project.status)} animate-badge-glow`}
                                             >
                                                 {project.status.toUpperCase()}
                                             </div>
@@ -371,7 +420,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onNavigate
                             className="text-center p-6 bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl border border-gray-600"
                         >
                             <div
-                                className={`text-3xl font-bold text-${stat.color}-400 mb-2 animate-pulse-scale`}
+                                className={`text-3xl font-bold ${getStatColorClass(stat.color)} mb-2 animate-pulse-scale`}
                                 style={{ animationDelay: `${index * 0.3}s` } as React.CSSProperties}
                             >
                                 {stat.value}
@@ -417,6 +466,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onNavigate
                             }
                         ].map((achievement, index) => {
                             const Icon = achievement.icon;
+                            const achStyle = getAchievementStyles(achievement.color);
                             return (
                                 <motion.div
                                     key={achievement.title}
@@ -427,11 +477,11 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onNavigate
                                     className="p-6 bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl border border-gray-600 hover:border-green-400/50 transition-all duration-300"
                                 >
                                     <div className="flex items-start space-x-4">
-                                        <div className={`w-12 h-12 bg-${achievement.color}-500/20 rounded-xl flex items-center justify-center flex-shrink-0`}>
-                                            <Icon className={`w-6 h-6 text-${achievement.color}-400`} />
+                                        <div className={`w-12 h-12 ${achStyle.bg} rounded-xl flex items-center justify-center flex-shrink-0`}>
+                                            <Icon className={`w-6 h-6 ${achStyle.text}`} />
                                         </div>
                                         <div>
-                                            <h4 className={`text-lg font-bold text-${achievement.color}-300 mb-2`}>
+                                            <h4 className={`text-lg font-bold ${achStyle.title} mb-2`}>
                                                 {achievement.title}
                                             </h4>
                                             <p className="text-gray-400 text-sm leading-relaxed">

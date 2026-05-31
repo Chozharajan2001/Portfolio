@@ -35,6 +35,53 @@ const colorGlowsPeak = {
     orange: 'rgba(249, 115, 22, 0.4)',
 } as const;
 
+const getRobotStyles = (color: 'cyan' | 'blue' | 'purple' | 'green' | 'orange') => {
+    switch (color) {
+        case 'cyan':
+            return {
+                border: 'border-cyan-500/50',
+                fromTo: 'from-cyan-400 to-cyan-600',
+                text: 'text-cyan-400',
+                dot: 'bg-cyan-400',
+            };
+        case 'blue':
+            return {
+                border: 'border-blue-500/50',
+                fromTo: 'from-blue-400 to-blue-600',
+                text: 'text-blue-400',
+                dot: 'bg-blue-400',
+            };
+        case 'purple':
+            return {
+                border: 'border-purple-500/50',
+                fromTo: 'from-purple-400 to-purple-600',
+                text: 'text-purple-400',
+                dot: 'bg-purple-400',
+            };
+        case 'green':
+            return {
+                border: 'border-green-500/50',
+                fromTo: 'from-green-400 to-green-600',
+                text: 'text-green-400',
+                dot: 'bg-green-400',
+            };
+        case 'orange':
+            return {
+                border: 'border-orange-500/50',
+                fromTo: 'from-orange-400 to-orange-600',
+                text: 'text-orange-400',
+                dot: 'bg-orange-400',
+            };
+        default:
+            return {
+                border: 'border-gray-500/50',
+                fromTo: 'from-gray-400 to-gray-600',
+                text: 'text-gray-400',
+                dot: 'bg-gray-400',
+            };
+    }
+};
+
 const RobotGuide: React.FC<RobotGuideProps> = React.memo(({
     character,
     message,
@@ -44,6 +91,7 @@ const RobotGuide: React.FC<RobotGuideProps> = React.memo(({
 }) => {
     const robot = robotCharacters[character];
     const Icon = robot.icon;
+    const styles = getRobotStyles(robot.color);
 
     return (
         <AnimatePresence>
@@ -81,7 +129,7 @@ const RobotGuide: React.FC<RobotGuideProps> = React.memo(({
                 >
                     {/* Robot body - optimized with GPU CSS dynamic glow */}
                     <div
-                        className={`relative bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-2xl border-2 border-${robot.color}-500/50 shadow-2xl animate-robot-glow`}
+                        className={`relative bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-2xl border-2 ${styles.border} shadow-2xl animate-robot-glow`}
                         style={{
                             '--robot-glow-color': colorGlows[robot.color],
                             '--robot-glow-color-peak': colorGlowsPeak[robot.color]
@@ -90,7 +138,7 @@ const RobotGuide: React.FC<RobotGuideProps> = React.memo(({
                         {/* Robot head */}
                         <div className="flex items-start space-x-4">
                             <div
-                                className={`w-16 h-16 bg-gradient-to-br from-${robot.color}-400 to-${robot.color}-600 rounded-xl flex items-center justify-center relative overflow-hidden animate-robot-scale`}
+                                className={`w-16 h-16 bg-gradient-to-br ${styles.fromTo} rounded-xl flex items-center justify-center relative overflow-hidden animate-robot-scale`}
                             >
                                 <Icon className="w-8 h-8 text-white" />
 
@@ -107,7 +155,7 @@ const RobotGuide: React.FC<RobotGuideProps> = React.memo(({
 
                             <div className="flex-1">
                                 <motion.h3
-                                    className={`text-${robot.color}-400 font-bold text-lg mb-2`}
+                                    className={`${styles.text} font-bold text-lg mb-2`}
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     transition={{ delay: 0.3 }}
@@ -139,7 +187,7 @@ const RobotGuide: React.FC<RobotGuideProps> = React.memo(({
                             {[...Array(3)].map((_, i) => (
                                 <div
                                     key={i}
-                                    className={`w-1.5 h-1.5 bg-${robot.color}-400 rounded-full animate-pulse`}
+                                    className={`w-1.5 h-1.5 ${styles.dot} rounded-full animate-pulse`}
                                     style={{ animationDelay: `${i * 0.2}s` }}
                                 />
                             ))}
@@ -147,7 +195,7 @@ const RobotGuide: React.FC<RobotGuideProps> = React.memo(({
                     </div>
 
                     {/* Speech bubble pointer */}
-                    <div className={`absolute top-8 ${position === 'left' ? '-right-2' : '-left-2'} w-4 h-4 bg-gray-800 transform rotate-45 border-${robot.color}-500/50 ${position === 'left' ? 'border-r border-b' : 'border-l border-t'}`} />
+                    <div className={`absolute top-8 ${position === 'left' ? '-right-2' : '-left-2'} w-4 h-4 bg-gray-800 transform rotate-45 ${styles.border} ${position === 'left' ? 'border-r border-b' : 'border-l border-t'}`} />
                 </motion.div>
             )}
         </AnimatePresence>

@@ -137,6 +137,131 @@ const skillCategories: Record<CategoryId, SkillCategory> = {
 
 const categories = Object.keys(skillCategories) as CategoryId[];
 
+const getCategoryStyles = (category: CategoryId) => {
+    switch (category) {
+        case 'frontend':
+            return {
+                bgActive: 'bg-cyan-500/20 text-cyan-300 border-cyan-400 shadow-lg shadow-cyan-500/20',
+                borderHover: 'hover:border-cyan-400/50 hover:text-cyan-300',
+                bgCardActive: 'bg-cyan-500/10 border-cyan-400 shadow-lg shadow-cyan-500/20',
+                textActive: 'text-cyan-300',
+                textLevel: 'text-cyan-400',
+                progressGradient: 'from-cyan-400 to-cyan-600',
+                dotActive: 'bg-cyan-400',
+                glowOverlay: 'via-cyan-500/5',
+                glowBeam: 'via-cyan-400/20'
+            };
+        case 'backend':
+            return {
+                bgActive: 'bg-blue-500/20 text-blue-300 border-blue-400 shadow-lg shadow-blue-500/20',
+                borderHover: 'hover:border-blue-400/50 hover:text-blue-300',
+                bgCardActive: 'bg-blue-500/10 border-blue-400 shadow-lg shadow-blue-500/20',
+                textActive: 'text-blue-300',
+                textLevel: 'text-blue-400',
+                progressGradient: 'from-blue-400 to-blue-600',
+                dotActive: 'bg-blue-400',
+                glowOverlay: 'via-blue-500/5',
+                glowBeam: 'via-blue-400/20'
+            };
+        case 'devops':
+            return {
+                bgActive: 'bg-green-500/20 text-green-300 border-green-400 shadow-lg shadow-green-500/20',
+                borderHover: 'hover:border-green-400/50 hover:text-green-300',
+                bgCardActive: 'bg-green-500/10 border-green-400 shadow-lg shadow-green-500/20',
+                textActive: 'text-green-300',
+                textLevel: 'text-green-400',
+                progressGradient: 'from-green-400 to-green-600',
+                dotActive: 'bg-green-400',
+                glowOverlay: 'via-green-500/5',
+                glowBeam: 'via-green-400/20'
+            };
+        case 'tools':
+            return {
+                bgActive: 'bg-purple-500/20 text-purple-300 border-purple-400 shadow-lg shadow-purple-500/20',
+                borderHover: 'hover:border-purple-400/50 hover:text-purple-300',
+                bgCardActive: 'bg-purple-500/10 border-purple-400 shadow-lg shadow-purple-500/20',
+                textActive: 'text-purple-300',
+                textLevel: 'text-purple-400',
+                progressGradient: 'from-purple-400 to-purple-600',
+                dotActive: 'bg-purple-400',
+                glowOverlay: 'via-purple-500/5',
+                glowBeam: 'via-purple-400/20'
+            };
+        case 'regtech':
+            return {
+                bgActive: 'bg-red-500/20 text-red-300 border-red-400 shadow-lg shadow-red-500/20',
+                borderHover: 'hover:border-red-400/50 hover:text-red-300',
+                bgCardActive: 'bg-red-500/10 border-red-400 shadow-lg shadow-red-500/20',
+                textActive: 'text-red-300',
+                textLevel: 'text-red-400',
+                progressGradient: 'from-red-400 to-red-600',
+                dotActive: 'bg-red-400',
+                glowOverlay: 'via-red-500/5',
+                glowBeam: 'via-red-400/20'
+            };
+        case 'devtools':
+            return {
+                bgActive: 'bg-yellow-500/20 text-yellow-300 border-yellow-400 shadow-lg shadow-yellow-500/20',
+                borderHover: 'hover:border-yellow-400/50 hover:text-yellow-300',
+                bgCardActive: 'bg-yellow-500/10 border-yellow-400 shadow-lg shadow-yellow-500/20',
+                textActive: 'text-yellow-300',
+                textLevel: 'text-yellow-400',
+                progressGradient: 'from-yellow-400 to-yellow-600',
+                dotActive: 'bg-yellow-400',
+                glowOverlay: 'via-yellow-500/5',
+                glowBeam: 'via-yellow-400/20'
+            };
+        case 'languages':
+            return {
+                bgActive: 'bg-indigo-500/20 text-indigo-300 border-indigo-400 shadow-lg shadow-indigo-500/20',
+                borderHover: 'hover:border-indigo-400/50 hover:text-indigo-300',
+                bgCardActive: 'bg-indigo-500/10 border-indigo-400 shadow-lg shadow-indigo-500/20',
+                textActive: 'text-indigo-300',
+                textLevel: 'text-indigo-400',
+                progressGradient: 'from-indigo-400 to-indigo-600',
+                dotActive: 'bg-indigo-400',
+                glowOverlay: 'via-indigo-500/5',
+                glowBeam: 'via-indigo-400/20'
+            };
+        case 'exposure':
+            return {
+                bgActive: 'bg-orange-500/20 text-orange-300 border-orange-400 shadow-lg shadow-orange-500/20',
+                borderHover: 'hover:border-orange-400/50 hover:text-orange-300',
+                bgCardActive: 'bg-orange-500/10 border-orange-400 shadow-lg shadow-orange-500/20',
+                textActive: 'text-orange-300',
+                textLevel: 'text-orange-400',
+                progressGradient: 'from-orange-400 to-orange-600',
+                dotActive: 'bg-orange-400',
+                glowOverlay: 'via-orange-500/5',
+                glowBeam: 'via-orange-400/20'
+            };
+        case 'softskills':
+            return {
+                bgActive: 'bg-pink-500/20 text-pink-300 border-pink-400 shadow-lg shadow-pink-500/20',
+                borderHover: 'hover:border-pink-400/50 hover:text-pink-300',
+                bgCardActive: 'bg-pink-500/10 border-pink-400 shadow-lg shadow-pink-500/20',
+                textActive: 'text-pink-300',
+                textLevel: 'text-pink-400',
+                progressGradient: 'from-pink-400 to-pink-600',
+                dotActive: 'bg-pink-400',
+                glowOverlay: 'via-pink-500/5',
+                glowBeam: 'via-pink-400/20'
+            };
+        default:
+            return {
+                bgActive: 'bg-gray-500/20 text-gray-300 border-gray-400 shadow-lg shadow-gray-500/20',
+                borderHover: 'hover:border-gray-400/50 hover:text-gray-300',
+                bgCardActive: 'bg-gray-500/10 border-gray-400 shadow-lg shadow-gray-500/20',
+                textActive: 'text-gray-300',
+                textLevel: 'text-gray-400',
+                progressGradient: 'from-gray-400 to-gray-600',
+                dotActive: 'bg-gray-400',
+                glowOverlay: 'via-gray-500/5',
+                glowBeam: 'via-gray-400/20'
+            };
+    }
+};
+
 const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) => {
     const [showGuide, setShowGuide] = useState(false);
     const [activeCategory, setActiveCategory] = useState<CategoryId>('frontend');
@@ -176,6 +301,11 @@ const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) 
                     </p>
                 </motion.div>
 
+                {/* Mobile scroll swipe indicator helper */}
+                <div className="block md:hidden text-center text-xs text-purple-400/60 mb-3 animate-pulse">
+                    Swipe categories ↔
+                </div>
+
                 {/* Category Selection */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -184,8 +314,9 @@ const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) 
                     className="flex flex-nowrap md:flex-wrap overflow-x-auto md:overflow-visible justify-start md:justify-center gap-3 mb-12 pb-3 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-none"
                 >
                     {categories.map((category) => {
-                        const { title, icon: Icon, color } = skillCategories[category];
+                        const { title, icon: Icon } = skillCategories[category];
                         const isActive = activeCategory === category;
+                        const styles = getCategoryStyles(category);
 
                         return (
                             <motion.button
@@ -194,8 +325,8 @@ const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) 
                                 whileTap={{ scale: 0.95 }}
                                 onClick={() => setActiveCategory(category)}
                                 className={`flex items-center space-x-3 px-4 py-2.5 sm:px-6 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-sm sm:text-base transition-all duration-300 border flex-shrink-0 ${isActive
-                                    ? `bg-${color}-500/20 text-${color}-300 border-${color}-400 shadow-lg shadow-${color}-500/20`
-                                    : 'bg-gray-800/50 text-gray-400 border-gray-600 hover:border-purple-400/50 hover:text-purple-300'
+                                    ? styles.bgActive
+                                    : `bg-gray-800/50 text-gray-400 border-gray-600 ${styles.borderHover}`
                                     }`}
                             >
                                 <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -217,7 +348,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) 
                     >
                         {skillCategories[activeCategory].skills.map((skill: Skill, index: number) => {
                             const isHovered = hoveredSkill === skill.name;
-                            const color = skillCategories[activeCategory].color;
+                            const styles = getCategoryStyles(activeCategory);
 
                             return (
                                 <motion.div
@@ -228,19 +359,19 @@ const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) 
                                     onMouseEnter={() => setHoveredSkill(skill.name)}
                                     onMouseLeave={() => setHoveredSkill(null)}
                                     className={`relative p-5 sm:p-6 rounded-2xl border transition-all duration-300 cursor-pointer ${isHovered
-                                        ? `bg-${color}-500/10 border-${color}-400 shadow-lg shadow-${color}-500/20`
+                                        ? styles.bgCardActive
                                         : 'bg-gray-800/50 border-gray-600 hover:border-gray-500'
                                         }`}
                                 >
                                     {/* Skill header */}
                                     <div className="flex justify-between items-start mb-4">
                                         <div>
-                                            <h3 className={`text-xl font-bold mb-2 ${isHovered ? `text-${color}-300` : 'text-white'}`}>
+                                            <h3 className={`text-xl font-bold mb-2 ${isHovered ? styles.textActive : 'text-white'}`}>
                                                 {skill.name}
                                             </h3>
                                             <p className="text-gray-400 text-sm">{skill.description}</p>
                                         </div>
-                                        <div className={`text-2xl font-bold ${isHovered ? `text-${color}-400` : 'text-gray-300'}`}>
+                                        <div className={`text-2xl font-bold ${isHovered ? styles.textLevel : 'text-gray-300'}`}>
                                             {skill.level}%
                                         </div>
                                     </div>
@@ -252,7 +383,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) 
                                                 initial={{ width: 0 }}
                                                 animate={{ width: `${skill.level}%` }}
                                                 transition={{ duration: 1, delay: index * 0.1 + 0.5 }}
-                                                className={`bg-gradient-to-r from-${color}-400 to-${color}-600 h-3 rounded-full relative overflow-hidden`}
+                                                className={`bg-gradient-to-r ${styles.progressGradient} h-3 rounded-full relative overflow-hidden`}
                                             >
                                                 {/* Animated shine effect */}
                                                 <motion.div
@@ -271,10 +402,10 @@ const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) 
                                                 initial={{ opacity: 0 }}
                                                 animate={{ opacity: 1 }}
                                                 exit={{ opacity: 0 }}
-                                                className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/5 to-transparent rounded-2xl"
+                                                className={`absolute inset-0 bg-gradient-to-r from-transparent ${styles.glowOverlay} to-transparent rounded-2xl`}
                                             >
                                                 <motion.div
-                                                    className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent"
+                                                    className={`absolute inset-0 bg-gradient-to-r from-transparent ${styles.glowBeam} to-transparent`}
                                                     animate={{ x: ['-100%', '100%'] }}
                                                     transition={{ duration: 1.5, repeat: Infinity }}
                                                 />
@@ -291,7 +422,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = React.memo(({ onNavigate }) 
                                                 animate={{ scale: i < Math.floor(skill.level / 20) ? 1 : 0.3 }}
                                                 transition={{ duration: 0.3, delay: index * 0.1 + i * 0.1 }}
                                                 className={`w-2 h-2 rounded-full ${i < Math.floor(skill.level / 20)
-                                                    ? `bg-${color}-400`
+                                                    ? styles.dotActive
                                                     : 'bg-gray-600'
                                                     }`}
                                             />

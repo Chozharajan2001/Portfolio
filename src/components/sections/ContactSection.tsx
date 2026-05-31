@@ -16,6 +16,33 @@ interface ContactSectionProps {
     onNavigate: (section: string) => void;
 }
 
+const getSocialStyles = (color: string) => {
+    switch (color) {
+        case 'blue': // LinkedIn
+            return {
+                bg: 'from-blue-500/10 to-blue-600/10',
+                border: 'border-blue-500/30',
+                shadow: 'hover:shadow-blue-500/20',
+                text: 'text-blue-400'
+            };
+        case 'cyan': // Custom Portfolio
+            return {
+                bg: 'from-cyan-500/10 to-cyan-600/10',
+                border: 'border-cyan-500/30',
+                shadow: 'hover:shadow-cyan-500/20',
+                text: 'text-cyan-400'
+            };
+        case 'gray': // GitHub
+        default:
+            return {
+                bg: 'from-gray-500/10 to-gray-600/10',
+                border: 'border-gray-500/30',
+                shadow: 'hover:shadow-gray-500/20',
+                text: 'text-gray-400'
+            };
+    }
+};
+
 const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) => {
     const [showGuide, setShowGuide] = useState(false);
     const [formData, setFormData] = useState({
@@ -330,6 +357,7 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) => {
                             <div className="grid grid-cols-1 gap-4">
                                 {socialLinks.map((social) => {
                                     const Icon = social.icon;
+                                    const styles = getSocialStyles(social.color);
 
                                     return (
                                         <motion.a
@@ -337,9 +365,9 @@ const ContactSection: React.FC<ContactSectionProps> = ({ onNavigate }) => {
                                             href={social.href}
                                             whileHover={{ scale: 1.05, y: -2 }}
                                             whileTap={{ scale: 0.95 }}
-                                            className={`flex items-center space-x-4 p-4 bg-gradient-to-r from-${social.color}-500/10 to-${social.color}-600/10 border border-${social.color}-500/30 rounded-xl hover:shadow-lg hover:shadow-${social.color}-500/20 transition-all duration-300`}
+                                            className={`flex items-center space-x-4 p-4 bg-gradient-to-r ${styles.bg} border ${styles.border} rounded-xl hover:shadow-lg ${styles.shadow} transition-all duration-300`}
                                         >
-                                            <Icon className={`w-8 h-8 text-${social.color}-400`} />
+                                            <Icon className={`w-8 h-8 ${styles.text}`} />
                                             <span className="text-white font-medium">{social.label}</span>
                                         </motion.a>
                                     );
